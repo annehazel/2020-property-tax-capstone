@@ -1,0 +1,7 @@
+property_tax.content:
+  path: '/property-tax-center'
+  defaults:
+    _controller: '\Drupal\property_tax\Controller\PtcController::content'
+    _title: 'Property Tax Learning and Data Center'
+  requirements:
+    _permission: 'access content'
