@@ -1,0 +1,6 @@
+name: Property Tax Module
+description: Creates the Lincoln Institute's Property Tax Center setup
+package: Custom
+
+type: module
+core: 8.x
