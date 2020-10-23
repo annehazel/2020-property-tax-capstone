@@ -1,0 +1,6 @@
+property_tax.admin:
+  title: 'Property Tax Module settings'
+  description: 'PTC admin settings page'
+  parent: system.admin_config_development
+  route_name: property_tax.content
+  weight: 100
