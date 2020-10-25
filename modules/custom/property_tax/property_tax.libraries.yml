@@ -1,0 +1,4 @@
+d3:
+  version: v6.2.0
+  js:
+    d3.min.js: {}
