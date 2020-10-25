@@ -21,7 +21,8 @@
         "drupal/core-project-message": "^8.8",
         "drupal/core-recommended": "^8.8",
         "drupal/core-vendor-hardening": "^8.8",
-        "drupal/libraries": "^3.0@alpha"
+        "drupal/libraries": "^3.0@alpha",
+        "drupal/paragraphs": "^1.12"
     },
     "conflict": {
         "drupal/drupal": "*"
