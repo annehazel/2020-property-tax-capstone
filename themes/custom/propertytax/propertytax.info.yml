@@ -1,10 +1,11 @@
-name: Property Tax
+name: Property Tax Theme
 type: theme
 description: 'TBD'
 base theme: bootstrap
 package: Custom
 core: 8.x
-
+libraries:
+  - propertytax/propertytax
 
 regions:
   navigation: 'Navigation'

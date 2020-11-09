@@ -10,3 +10,4 @@ test:
       css/test.css: {}
   js:
     js/test.js: {}
+    js/line-own-source-rev.js: {}
