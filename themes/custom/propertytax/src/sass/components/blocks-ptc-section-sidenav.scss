@@ -1,0 +1,30 @@
+@import '../colors.scss';
+
+
+div.region-sidebar-first {
+    
+    #block-explorethedata, #block-learn {
+
+        background-color: #ccd2d6;
+
+        @media (min-width: 992px) { 
+ 
+            min-height: 400px;
+
+        }
+        
+        h2 {
+            font-size: large;
+            padding: 10px 15px;
+        }
+
+        a {
+
+            color:black;
+
+
+        }
+
+
+    }
+}

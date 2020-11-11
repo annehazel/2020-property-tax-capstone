@@ -65,4 +65,20 @@ Components
   font-weight: 500;
 }
 
+div.region-sidebar-first #block-explorethedata, div.region-sidebar-first #block-learn {
+  background-color: #ccd2d6;
+}
+@media (min-width: 992px) {
+  div.region-sidebar-first #block-explorethedata, div.region-sidebar-first #block-learn {
+    min-height: 400px;
+  }
+}
+div.region-sidebar-first #block-explorethedata h2, div.region-sidebar-first #block-learn h2 {
+  font-size: large;
+  padding: 10px 15px;
+}
+div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #block-learn a {
+  color: black;
+}
+
 /*# sourceMappingURL=pt-style.css.map */
