@@ -1,0 +1,21 @@
+/*-----------------------------------------
+LAYOUT
+------------------------------------------*/
+.navbar-default {
+  background-color: #48535B;
+}
+
+a.logo.navbar-btn img {
+  width: 25em;
+  padding: 1em;
+}
+
+#block-propertytax-account-menu {
+  visibility: hidden;
+}
+
+h1 {
+  color: black;
+}
+
+/*# sourceMappingURL=pt-style.css.map */

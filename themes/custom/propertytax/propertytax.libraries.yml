@@ -2,4 +2,4 @@ propertytax:
   version: 1
   css:
     theme:
-      css/pt.css: { weight: 10 }
+      css/pt-style.css: { weight: 10 }
