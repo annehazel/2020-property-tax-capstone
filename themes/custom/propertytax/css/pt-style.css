@@ -10,10 +10,9 @@ a.logo.navbar-btn img {
   padding: 1em;
 }
 
-#block-propertytax-account-menu {
-  visibility: hidden;
-}
-
+/* #block-propertytax-account-menu {
+     visibility: hidden;
+}*/
 div.region-navigation a.name.navbar-brand {
   color: white;
   padding-top: 1.5em;
@@ -22,6 +21,32 @@ div.region-navigation a.name.navbar-brand {
 
 h1 {
   color: black;
+}
+
+/*-----------------------------------------
+Components
+------------------------------------------*/
+/* PTC Section & Cards */
+.ptc-section-container {
+  background-color: #F7F8F9;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.ptc-section-container img {
+  width: 150px;
+  height: 150px;
+  padding: 2em 1.5em;
+}
+
+.ptc-section-container div.views-col {
+  margin-right: 1.5em;
+  background-color: gray;
+  text-align: center;
+}
+.ptc-section-container div.views-col img {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*# sourceMappingURL=pt-style.css.map */
