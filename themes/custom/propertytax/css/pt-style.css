@@ -14,6 +14,12 @@ a.logo.navbar-btn img {
   visibility: hidden;
 }
 
+div.region-navigation a.name.navbar-brand {
+  color: white;
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+}
+
 h1 {
   color: black;
 }
