@@ -128,25 +128,15 @@
 
 
 	
-				$('.filters-line-viz-1')
-					.append('input');	
+				jQuery(".filters-line-viz-1")
+					.append('<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">')
+					.append('<label for="vehicle1"> I have a bike</label><br></br>');
+						
 
 
 
 
 
 
-			d3.select("#genrev")
-				.on("click", function(){
-				console.log("Here");
-			});
 
-			});
-
-
-
-
-			d3.select("#genrevlabel")
-				.on("mouseenter", function(){
-				console.log("Here");
 			});

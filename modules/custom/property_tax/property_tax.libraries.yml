@@ -11,3 +11,6 @@ test:
   js:
     js/test.js: {}
     js/line-own-source-rev.js: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.once
