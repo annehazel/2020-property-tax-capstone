@@ -5,7 +5,7 @@
 			var h = 300;
 			var padding = 40;
 
-			var dataset, xScale, yScale, xAxis, yAxis, line, dangerLine;  //Empty, for now
+			var dataset, xScale, yScale, xAxis, yAxis, line;  //Empty, for now
 
 			//For converting Dates to strings
 			var formatTime = d3.timeFormat("%Y");
