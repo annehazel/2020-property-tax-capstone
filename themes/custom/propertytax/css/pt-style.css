@@ -30,8 +30,11 @@ Components
 .ptc-section-container {
   margin-top: 2em;
   margin-bottom: 2em;
-  background-color: #f2f2f2;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ccd2d6;
   height: 25em;
+  max-width: 90%;
 }
 
 .ptc-section-container img {
@@ -41,11 +44,6 @@ Components
 }
 
 /* Cards as a unit */
-.ptc-section-container div.views-row {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* Individual cards */
 .ptc-section-container div.views-col {
   margin-right: 1.5em;
@@ -79,6 +77,29 @@ div.region-sidebar-first #block-explorethedata h2, div.region-sidebar-first #blo
 }
 div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #block-learn a {
   color: black;
+}
+
+/* main content area*/
+@media (min-width: 992px) {
+  .content {
+    min-height: 400px;
+  }
+}
+
+/* bottom page navigation */
+.ptc-page-nav-bottom {
+  background-color: #0F7496;
+  position: absolute;
+  bottom: 0;
+}
+
+/*-----------------------------------------
+Visualizations
+------------------------------------------*/
+.genRevLine, .ownSourceRevLine, .ptRevLine {
+  fill: none;
+  stroke: teal;
+  stroke-width: 0.5;
 }
 
 /*# sourceMappingURL=pt-style.css.map */

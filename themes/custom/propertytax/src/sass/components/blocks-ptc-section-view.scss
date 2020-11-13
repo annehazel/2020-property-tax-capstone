@@ -6,8 +6,11 @@
 .ptc-section-container {
     margin-top:2em;
     margin-bottom: 2em;
-    background-color: #f2f2f2;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $lincoln-lightblue;
     height: 25em;
+    max-width: 90%;
 }
 
 
@@ -20,11 +23,9 @@
 
 /* Cards as a unit */
 
-.ptc-section-container div.views-row {
- margin-left: auto;
- margin-right: auto;
+.ptc-section-container div.views-row div {
 
-
+    
 }
 
 

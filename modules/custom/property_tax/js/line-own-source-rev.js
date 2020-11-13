@@ -77,7 +77,7 @@
 
 
 				//Create SVG element
-				var svg = d3.select("#line-viz-1")
+				var svg = d3.selectAll(".line-viz-1")
 							.append("svg")
 							.attr("width", w)
 							.attr("height", h);
@@ -124,6 +124,15 @@
 						))
 						.attr("class", "ptRevLine")
 						.attr("d", ptRevLine)
+
+
+
+	
+				$('.filters-line-viz-1')
+					.append('input');	
+
+
+
 
 
 
