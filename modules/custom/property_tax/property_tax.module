@@ -3,7 +3,7 @@
 
 function property_tax_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'property_tax/d3';
-  $attachments['#attached']['library'][] = 'property_tax/test';
+  $attachments['#attached']['library'][] = 'property_tax/ptc';
 }
 
 ?>
