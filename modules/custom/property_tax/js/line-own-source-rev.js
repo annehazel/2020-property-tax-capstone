@@ -130,7 +130,7 @@
 	
 				jQuery(".filters-line-viz-1")
 					.append('<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">')
-					.append('<label for="vehicle1"> I have a bike</label><br></br>');
+					.append('<label for="vehicle1"> Test</label><br></br>');
 						
 
 

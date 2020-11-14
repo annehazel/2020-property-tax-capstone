@@ -9,7 +9,7 @@
 
     @media (min-width: 992px) { 
  
-        min-height: 400px;
+        min-height: 600px;
 
     }
 
@@ -20,5 +20,15 @@
 .ptc-page-nav-bottom {
     background-color: $lincoln-blue;
     position: absolute;
+    width: 100%;
     bottom: 0;
+    a {
+    color: white;
+    }
+    ul {
+
+        display: flex;
+        justify-content: space-between;
+        list-style: none;
+    }
 }

@@ -68,7 +68,7 @@ div.region-sidebar-first #block-explorethedata, div.region-sidebar-first #block-
 }
 @media (min-width: 992px) {
   div.region-sidebar-first #block-explorethedata, div.region-sidebar-first #block-learn {
-    min-height: 400px;
+    min-height: 600px;
   }
 }
 div.region-sidebar-first #block-explorethedata h2, div.region-sidebar-first #block-learn h2 {
@@ -82,7 +82,7 @@ div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #bloc
 /* main content area*/
 @media (min-width: 992px) {
   .content {
-    min-height: 400px;
+    min-height: 600px;
   }
 }
 
@@ -90,7 +90,16 @@ div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #bloc
 .ptc-page-nav-bottom {
   background-color: #0F7496;
   position: absolute;
+  width: 100%;
   bottom: 0;
+}
+.ptc-page-nav-bottom a {
+  color: white;
+}
+.ptc-page-nav-bottom ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
 }
 
 /*-----------------------------------------
