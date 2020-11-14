@@ -23,7 +23,7 @@
 
 
 	//Load in data
-	d3.csv("https://propertytaxcenter.lndo.site/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
+	d3.csv("https://dev-propertytaxcenter.pantheonsite.io/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
 		function(data) {
 
 		var dataset = data;
