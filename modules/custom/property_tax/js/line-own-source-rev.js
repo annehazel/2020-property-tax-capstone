@@ -181,8 +181,8 @@
 					
 				var dates = _.pluck(newData, 'date');
 				var values = _.pluck(newData, 'genRev');
-
-				console.log(newData);
+				console.log("full dataset = ", dataset)
+				console.log("Boston dataset = ", newData);
 
 
 
