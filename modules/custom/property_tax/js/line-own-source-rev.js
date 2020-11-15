@@ -11,6 +11,7 @@
 
 	// Setup variables
 	var dataset, xScale, yScale, xAxis, yAxis, line;
+	var revDataset =[];
 
 
 
@@ -28,48 +29,59 @@
 
 		var dataset = data;
 
-
-		return{
-
+		revDataset.push({
 			cityId: dataset.id_city,
 			cityName: dataset.city_name,
-			date: new Date(dataset.year, 0, 1), 
-			genRev: parseFloat(dataset.rev_general_city),
-			ownSourceRev: parseFloat(dataset.own_source_rev_city),
-			ptRev: parseFloat(dataset.tax_property_city)
+			year: new Date(dataset.year, 0, 1),
+			revType: 'General Revenue',
+			amount: parseFloat(dataset.rev_general_city)
+		},{
+			cityId: dataset.id_city,
+			cityName: dataset.city_name,
+			year: new Date(dataset.year, 0, 1),
+			revType: 'Own Source Revenue',
+			amount: parseFloat(dataset.own_source_rev_city)
+		},{
+			cityId: dataset.id_city,
+			cityName: dataset.city_name,
+			year: new Date(dataset.year, 0, 1),
+			revType: 'Property Tax Revenue',
+			amount: parseFloat(dataset.tax_property_city)
+		});
 
 
-			 };
+		return revDataset;
 
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
 
+				console.log(revDataset);
 			
-			var revDataset = [];
+			// var revDataset = [];
 
-			for (index = 0; index < dataset.length; index++) {
-				revDataset.push(dataset[index].cityId);
-			}
+			// for (index = 0; index < dataset.length; index++) {
+			// 	revDataset.push(dataset[index].cityId);
+			// }
 
-			function onlyUnique(value, index, self) {
-				return self.indexOf(value) === index;
-			}
+			// function onlyUnique(value, index, self) {
+			// 	return self.indexOf(value) === index;
+			// }
 
-			revDataset = revDataset.filter(onlyUnique);
+			// revDataset = revDataset.filter(onlyUnique);
 
-			console.log(revDataset);
-
-
-			for (index = 0; index < dataset.length; index++) {
-
-				if(dataset[index].cityID )
+			// console.log(revDataset);
 
 
+			// for (index = 0; index < dataset.length; index++) {
+
+			// 	if(dataset[index].cityID )
 
 
 
-				revDataset.push(dataset[index].cityId);
-			}
+
+
+			// 	revDataset.push(dataset[index].cityId);
+			// }
 
 
 
