@@ -24,7 +24,8 @@ h1 {
 }
 
 article.ptc-landing-page div.content {
-  margin-left: 15%;
+  margin-left: 8%;
+  margin-top: 3%;
 }
 
 /*-----------------------------------------
@@ -85,7 +86,7 @@ div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #bloc
 
 /* main content area*/
 @media (min-width: 992px) {
-  .content {
+  .ptc-book-page div.content {
     min-height: 600px;
   }
 }
