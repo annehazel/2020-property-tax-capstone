@@ -23,7 +23,7 @@
 
 
 	//Load in data
-	d3.csv("https://dev-propertytaxcenter.pantheonsite.io/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
+	d3.csv("https://propertytaxcenter.lndo.site/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
 		function(data) {
 
 		var dataset = data;
@@ -221,17 +221,31 @@
 						const ym = yScale.invert(pointer[1]);
 						// ym should store the value associated with pointer position
 						const i = d3.bisectCenter(dates, xm);
+						const year = formatTime(dates[i]);
 						// i should be the index of the closest year value in newData
-						const s = d3.least(newData, function(d) { 
-							Math.abs(d.genRev[i] - ym)
+						// figure out what year i is
+						
+						var yearData = newData.filter(
+							function(d){
+								return d.date == dates[i];
+							}
+
+						)
+
+						const s = d3.least(yearData, function(d) { 
+							console.log(d.genRev);
+							console.log(ym);
+							return Math.abs(d.genRev - ym);
 						});
-						console.log(s);
-						path.attr("stroke", function(d){ 
-							d === s ? null : "#ddd"
-						})
-						.filter(function(d) { d === s}).raise();
-						dot.attr("transform", `translate(${xScale(dates[i])},${yScale(s.genRev[i])})`);
-						dot.select("text").text(s.name);
+						console.log(yearData);
+						
+						// path.attr("stroke", function(d){ 
+						// 	d === s ? null : "#ddd"
+						// })
+						//.filter(function(d) { d === s}).raise();
+						dot.attr("transform", `translate(${xScale(s.date)},${yScale(s.genRev)})`);
+						//dot.attr("transform", `translate(${xScale(dates[i])},${yScale(s.genRev[i])})`);
+						dot.select("text").text(s.cityName + ": " + s.genRev);
 					}
 						
 					function entered() {
