@@ -23,6 +23,10 @@ h1 {
   color: black;
 }
 
+article.ptc-landing-page div.content {
+  margin-left: 15%;
+}
+
 /*-----------------------------------------
 Components
 ------------------------------------------*/
