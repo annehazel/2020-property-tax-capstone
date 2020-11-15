@@ -10,7 +10,7 @@
 	var padding = 40;
 
 	// Setup variables
-	var dataset, xScale, yScale, xAxis, yAxis, line;
+	var dataset, xScale, yScale, xAxis, yAxis, line;  
 
 
 
@@ -28,53 +28,17 @@
 
 		var dataset = data;
 
-
-		return{
-
-			cityId: dataset.id_city,
-			cityName: dataset.city_name,
-			date: new Date(dataset.year, 0, 1), 
-			genRev: parseFloat(dataset.rev_general_city),
-			ownSourceRev: parseFloat(dataset.own_source_rev_city),
-			ptRev: parseFloat(dataset.tax_property_city)
-
-
-			 };
+			return {
+				date: new Date(dataset.year, 0, 1),  //Make a new Date object for each year
+				genRev: parseFloat(dataset.rev_general_city), //Convert from string to float
+				ownSourceRev: parseFloat(dataset.own_source_rev_city),
+				ptRev: parseFloat(dataset.tax_property_city),
+				cityId: dataset.id_city,
+				cityName: dataset.city_name
+			};
 
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
-
-			
-			var revDataset = [];
-
-			for (index = 0; index < dataset.length; index++) {
-				revDataset.push(dataset[index].cityId);
-			}
-
-			function onlyUnique(value, index, self) {
-				return self.indexOf(value) === index;
-			}
-
-			revDataset = revDataset.filter(onlyUnique);
-
-			console.log(revDataset);
-
-
-			for (index = 0; index < dataset.length; index++) {
-
-				if(dataset[index].cityID )
-
-
-
-
-
-				revDataset.push(dataset[index].cityId);
-			}
-
-
-
-
-
 
 
 				/* ---------------------------------
@@ -217,8 +181,8 @@
 					
 				var dates = _.pluck(newData, 'date');
 				var values = _.pluck(newData, 'genRev');
-				//console.log("full dataset = ", dataset)
-				//console.log("Boston dataset = ", newData);
+				console.log("full dataset = ", dataset)
+				console.log("Boston dataset = ", newData);
 
 
 
@@ -269,9 +233,11 @@
 						)
 
 						const s = d3.least(yearData, function(d) { 
+							console.log(d.genRev);
+							console.log(ym);
 							return Math.abs(d.genRev - ym);
 						});
-						//console.log(yearData);
+						console.log(yearData);
 						
 						// path.attr("stroke", function(d){ 
 						// 	d === s ? null : "#ddd"
