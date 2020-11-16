@@ -24,41 +24,43 @@ h1 {
 }
 
 article.ptc-landing-page div.content {
-  margin-left: 8%;
-  margin-top: 3%;
+  margin-top: 2em;
+  margin-left: 3%;
+  padding-left: 2em;
+  max-width: 80%;
 }
 
 /*-----------------------------------------
 Components
 ------------------------------------------*/
 /* PTC Section & Cards */
-.ptc-section-container {
-  margin-top: 2em;
-  margin-bottom: 2em;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #ccd2d6;
-  height: 25em;
-  max-width: 90%;
+@media (min-width: 992px) {
+  .ptc-section-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 5%;
+    padding-left: 2.2em;
+    background-color: #ccd2d6;
+    height: 25em;
+    max-width: 65%;
+    display: flex;
+  }
 }
 
-.ptc-section-container img {
-  width: 150px;
-  height: 150px;
-  padding: 2em 1.5em;
-}
-
-/* Cards as a unit */
 /* Individual cards */
 .ptc-section-container div.views-col {
-  margin-right: 1.5em;
+  margin-top: 1.5em;
+  margin-left: 4em;
   background-color: white;
-  padding: 1em;
+  padding-top: 1.5em;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 .ptc-section-container div.views-col img {
+  width: 150px;
+  height: 150px;
+  padding: 2em 1.5em;
   margin-left: auto;
   margin-right: auto;
 }
@@ -66,6 +68,12 @@ Components
   color: #0F7496;
   font-size: large;
   font-weight: 500;
+}
+@media (min-width: 992px) {
+  .ptc-section-container div.views-col {
+    min-height: 300px;
+    min-width: 250px;
+  }
 }
 
 div.region-sidebar-first #block-explorethedata, div.region-sidebar-first #block-learn {

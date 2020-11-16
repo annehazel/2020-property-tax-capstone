@@ -231,6 +231,7 @@
 							}
 
 						)
+						
 
 						const s = d3.least(yearData, function(d) { 
 							console.log(d.genRev);

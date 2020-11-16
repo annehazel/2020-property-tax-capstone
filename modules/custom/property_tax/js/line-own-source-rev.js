@@ -55,37 +55,8 @@
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
 
-				console.log(revDataset);
-			
-			// var revDataset = [];
-
-			// for (index = 0; index < dataset.length; index++) {
-			// 	revDataset.push(dataset[index].cityId);
-			// }
-
-			// function onlyUnique(value, index, self) {
-			// 	return self.indexOf(value) === index;
-			// }
-
-			// revDataset = revDataset.filter(onlyUnique);
-
-			// console.log(revDataset);
-
-
-			// for (index = 0; index < dataset.length; index++) {
-
-			// 	if(dataset[index].cityID )
-
-
-
-
-
-			// 	revDataset.push(dataset[index].cityId);
-			// }
-
-
-
-
+				
+		
 
 
 
@@ -96,19 +67,19 @@
 				//Create scale functions
 				xScale = d3.scaleTime()
 							.domain([
-								d3.min(dataset, function(d) { return d.date; }),
-								d3.max(dataset, function(d) { return d.date; })
+								d3.min(revDataset, function(d) { return d.year; }),
+								d3.max(revDataset, function(d) { return d.year; })
 							])
 							.range([padding, w]);
 
 				yScale = d3.scaleLinear()
 							.domain([
-								d3.min(dataset, function(d) {
-									if (d.genRev >= 0)
-									return d.genRev;
+								d3.min(revDataset, function(d) {
+									if (d.amount >= 0)
+									return d.amount;
 								}) - 10,
-								d3.max(dataset, function(d) {
-									return d.genRev;
+								d3.max(revDataset, function(d) {
+									return d.amount;
 								})
 							])
 							.range([h - padding, 0]);
@@ -131,29 +102,29 @@
 				------------------------------------*/
 
 				//Define line generators
-				genRevLine = d3.line()
+				revLine = d3.line()
 					.x(function(d) { 
-						return xScale(d.date); 
+						return xScale(d.year); 
 					})
-		    		.y(function(d) { 
-						return yScale(d.genRev); 
+		    		.y(function(d) {
+						return yScale(d.amount); 
 					});
 
-				ownSourceRevLine = d3.line()
-					.x(function(d) { 
-						return xScale(d.date); 
-					})
-		    		.y(function(d) { 
-						return yScale(d.ownSourceRev); 
-					});
+				// ownSourceRevLine = d3.line()
+				// 	.x(function(d) { 
+				// 		return xScale(d.year); 
+				// 	})
+		    	// 	.y(function(d) { 
+				// 		return yScale(d.ownSourceRev); 
+				// 	});
 
-				ptRevLine = d3.line()
-					.x(function(d) { 
-						return xScale(d.date); 
-					})
-					.y(function(d) { 
-						return yScale(d.ptRev); 
-					});
+				// ptRevLine = d3.line()
+				// 	.x(function(d) { 
+				// 		return xScale(d.year); 
+				// 	})
+				// 	.y(function(d) { 
+				// 		return yScale(d.ptRev); 
+				// 	});
 
 
 				/* ---------------------------------
@@ -181,37 +152,41 @@
 				// Create genRevLine for single city (General Revenue)
 
 				const path1 = svg.append("path")
-								.datum(dataset.filter(
+								.datum(revDataset.filter(
 									function(d){
-										return d.cityName == "MA: Boston"
+										return (d.cityName == "MA: Boston" && d.revType == "General Revenue")
 									}
 								))
 								.attr("class", "genRevLine")
-								.attr("d", genRevLine)
+								.attr("d", revLine)
 
 				svg.call(hover, path1); // testing new 'hover' functionality
 			
 
 				//Create ownSourceRevLine for single city (Own Source Revenue)
-				svg.append("path")
-					.datum(dataset.filter(
-						function(d){
-							return d.cityName == "MA: Boston"
-						}
-					))
-					.attr("class", "ownSourceRevLine")
-					.attr("d", ownSourceRevLine)
+				const path2 = svg.append("path")
+								.datum(revDataset.filter(
+									function(d){
+										return (d.cityName == "MA: Boston" && d.revType == "Own Source Revenue")
+									}
+								))
+								.attr("class", "genRevLine")
+								.attr("d", revLine)
+
+				svg.call(hover, path2); // testing new 'hover' functionality
 
 
-				//Create ptRevLine for single city (Property Tax Revenue)
-				svg.append("path")
-					.datum(dataset.filter(
-						function(d){
-							return d.cityName == "MA: Boston"
-						}
-					))
-					.attr("class", "ptRevLine")
-					.attr("d", ptRevLine)
+				const path3 = svg.append("path")
+				.datum(revDataset.filter(
+					function(d){
+						return (d.cityName == "MA: Boston" && d.revType == "Property Tax Revenue")
+					}
+				))
+				.attr("class", "genRevLine")
+				.attr("d", revLine)
+
+				svg.call(hover, path3); // testing new 'hover' functionality
+
 
 
 
@@ -221,14 +196,16 @@
 
 
 				// Filtering large dataset down to just Boston MA for testing
-				var newData = dataset.filter(
+				var cityData = revDataset.filter(
 					function(d){
 						return d.cityName == "MA: Boston"
 					}
 				);
+
+					console.log(cityData);
 					
-				var dates = _.pluck(newData, 'date');
-				var values = _.pluck(newData, 'genRev');
+				var years = _.pluck(cityData, 'year');
+				//var values = _.pluck(newData, 'genRev');
 				//console.log("full dataset = ", dataset)
 				//console.log("Boston dataset = ", newData);
 
@@ -268,30 +245,31 @@
 						// xm should store the date/year value associated with pointer position
 						const ym = yScale.invert(pointer[1]);
 						// ym should store the value associated with pointer position
-						const i = d3.bisectCenter(dates, xm);
-						const year = formatTime(dates[i]);
-						// i should be the index of the closest year value in newData
+						const i = d3.bisectCenter(years, xm);
+						//const year = formatTime(dates[i]);
+						// i should be the index of the closest year value in cityData
 						// figure out what year i is
-						
-						var yearData = newData.filter(
+						var yearData = cityData.filter(
 							function(d){
-								return d.date == dates[i];
+								return d.year == years[i];
 							}
-
 						)
 
+						console.log("yearData = ", yearData);
+
 						const s = d3.least(yearData, function(d) { 
-							return Math.abs(d.genRev - ym);
+							//console.log(d.amount);
+							return Math.abs(d.amount - ym);
 						});
-						//console.log(yearData);
+						//console.log("s = ", s);
 						
 						// path.attr("stroke", function(d){ 
 						// 	d === s ? null : "#ddd"
 						// })
 						//.filter(function(d) { d === s}).raise();
-						dot.attr("transform", `translate(${xScale(s.date)},${yScale(s.genRev)})`);
+						dot.attr("transform", `translate(${xScale(s.year)},${yScale(s.amount)})`);
 						//dot.attr("transform", `translate(${xScale(dates[i])},${yScale(s.genRev[i])})`);
-						dot.select("text").text(s.cityName + ": " + s.genRev + ", " + year);
+						dot.select("text").text(s.cityName + " " + s.revType + " " + s.amount);
 					}
 						
 					function entered() {
