@@ -100,19 +100,25 @@ div.region-sidebar-first #block-explorethedata a, div.region-sidebar-first #bloc
 }
 
 /* bottom page navigation */
-.ptc-page-nav-bottom {
-  background-color: #0F7496;
+nav.ptc-page-nav-bottom {
   position: absolute;
   width: 100%;
+  padding-left: 0;
   bottom: 0;
+  font-size: 14pt;
 }
-.ptc-page-nav-bottom a {
-  color: white;
-}
-.ptc-page-nav-bottom ul {
+nav.ptc-page-nav-bottom ul {
   display: flex;
   justify-content: space-between;
   list-style: none;
+  padding-left: 0;
+  padding-right: 2em;
+}
+nav.ptc-page-nav-bottom .previouspage {
+  float: left;
+}
+nav.ptc-page-nav-bottom .nextpage {
+  float: right;
 }
 
 /*-----------------------------------------

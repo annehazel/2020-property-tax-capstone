@@ -36,17 +36,19 @@
     {% if has_links %}
       
       <ul>
-      {% if prev_url %}
         <li class="previouspage">
+        {% if prev_url %}
           <a href="{{ prev_url }}" rel="prev" title="{{ 'Go to previous page'|t }}"><b>{{ '‹'|t }}</b> Previous</a>
+        {% endif %}
         </li>
-      {% endif %}
 
-      {% if next_url %}
+
         <li class="nextpage">
+        {% if next_url %}
           <a href="{{ next_url }}" rel="next" title="{{ 'Go to next page'|t }}">Next <b>{{ '›'|t }}</b></a>
+        {% endif %}
         </li>
-      {% endif %}
+
     </ul>
     {% endif %}
   </nav>

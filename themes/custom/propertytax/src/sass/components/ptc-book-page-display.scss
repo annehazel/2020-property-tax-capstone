@@ -16,20 +16,30 @@
 
 /* bottom page navigation */
 
-.ptc-page-nav-bottom {
-    background-color: $lincoln-blue;
+nav.ptc-page-nav-bottom {
     position: absolute;
     width: 100%;
+    padding-left: 0;
     bottom: 0;
-    a {
-    color: white;
-    }
+    font-size: 14pt;
+
     ul {
 
         display: flex;
         justify-content: space-between;
         list-style: none;
-
+        padding-left: 0;
+        padding-right: 2em;
 
     }
+
+    .previouspage {
+        float:left;
+    }
+
+    .nextpage {
+        float:right;
+    }
+
+
 }
