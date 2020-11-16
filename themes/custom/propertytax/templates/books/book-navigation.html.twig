@@ -32,18 +32,18 @@
 #}
 {% if tree or has_links %}
   <nav role="navigation" aria-labelledby="book-label-{{ book_id }}" class="ptc-page-nav-bottom">
-    {{ tree }}
+
     {% if has_links %}
       
       <ul>
       {% if prev_url %}
-        <li>
+        <li class="previouspage">
           <a href="{{ prev_url }}" rel="prev" title="{{ 'Go to previous page'|t }}"><b>{{ '‹'|t }}</b> Previous</a>
         </li>
       {% endif %}
 
       {% if next_url %}
-        <li>
+        <li class="nextpage">
           <a href="{{ next_url }}" rel="next" title="{{ 'Go to next page'|t }}">Next <b>{{ '›'|t }}</b></a>
         </li>
       {% endif %}
