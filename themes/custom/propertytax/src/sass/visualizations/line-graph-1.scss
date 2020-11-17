@@ -1,47 +1,59 @@
+ @import '../colors.scss';
+     
+ 
+    
+    .genRevLine, .ownSourceRevLine, .ptRevLine {
+        fill: none;
+        stroke-width: 1.5;
+    }
 
-			.genRevLine, .ownSourceRevLine, .ptRevLine {
-				fill: none;
-				stroke: teal;
-				stroke-width: 0.8;
-			}
+    .genRevLine  {
+        stroke: $lincoln-green2;
+    }
 
+    .ownSourceRevLine  {
+        stroke: $lincoln-blue;
+    }
 
+    .ptRevLine  {
+        stroke: $lincoln-purple;
+    }
 
-            .axis path,
-            .axis line {
-                fill: none;
-                stroke: #000;
-                shape-rendering: crispEdges;
-            }
-        
-            .x.axis path {
-                display: none;
-            }
-        
-            .line {
-                fill: none;
-                stroke: steelblue;
-                stroke-width: 1.5px;
-            }
-        
-            .overlay {
-                fill: none;
-                pointer-events: all;
-            }
-        
-            .focus circle {
-                fill: steelblue;
-            }
-        
-            .focus text {
-                font-size: 14px;
-            }
-        
-            .tooltip {
-                fill: white;
-                stroke: #000;
-            }
-        
-            .tooltip-date, .tooltip-likes {
-                font-weight: bold;
-            }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+        display: none;
+    }
+
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+
+    .overlay {
+        fill: none;
+        pointer-events: all;
+    }
+
+    .focus circle {
+        fill: steelblue;
+    }
+
+    .focus text {
+        font-size: 14px;
+    }
+
+    .tooltip {
+        fill: white;
+        stroke: #000;
+    }
+
+    .tooltip-date, .tooltip-likes {
+        font-weight: bold;
+    }

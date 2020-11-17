@@ -134,8 +134,19 @@ Visualizations
 
 .genRevLine, .ownSourceRevLine, .ptRevLine {
   fill: none;
-  stroke: teal;
-  stroke-width: 0.8;
+  stroke-width: 1.5;
+}
+
+.genRevLine {
+  stroke: #008A77;
+}
+
+.ownSourceRevLine {
+  stroke: #0F7496;
+}
+
+.ptRevLine {
+  stroke: #6C6A80;
 }
 
 .axis path,

@@ -13,6 +13,9 @@
 	var dataset, xScale, yScale, xAxis, yAxis, line;
 	var revDataset =[];
 
+	//starting city
+	var city = "MA: Boston";
+
 
 
 	/* ---------------------------------
@@ -21,7 +24,7 @@
 			
 	// Function to convert Dates to strings
 	var formatTime = d3.timeFormat("%Y");
-	var parseTime = d3.timeParse("%Y");
+
 
 
 	//Load in data
@@ -55,6 +58,7 @@
 
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
+
 
 
 
@@ -132,12 +136,13 @@
 					.call(yAxis);
 
 
+
 				// Create genRevLine for single city (General Revenue)
 
-				const path1 = svg.append("path")
+				var path1 = svg.append("path")
 								.datum(revDataset.filter(
 									function(d){
-										return (d.cityName == "MA: Boston" && d.revType == "General Revenue")
+										return (d.cityName == city && d.revType == "General Revenue")
 									}
 								))
 								.attr("class", "genRevLine")
@@ -147,26 +152,26 @@
 			
 
 				//Create ownSourceRevLine for single city (Own Source Revenue)
-				const path2 = svg.append("path")
+				var path2 = svg.append("path")
 								.datum(revDataset.filter(
 									function(d){
-										return (d.cityName == "MA: Boston" && d.revType == "Own Source Revenue")
+										return (d.cityName == city && d.revType == "Own Source Revenue")
 									}
 								))
-								.attr("class", "genRevLine")
+								.attr("class", "ownSourceRevLine")
 								.attr("d", revLine)
 
 				svg.call(hover, path2); 
 
 
-				const path3 = svg.append("path")
-				.datum(revDataset.filter(
-					function(d){
-						return (d.cityName == "MA: Boston" && d.revType == "Property Tax Revenue")
-					}
-				))
-				.attr("class", "genRevLine")
-				.attr("d", revLine)
+				var path3 = svg.append("path")
+								.datum(revDataset.filter(
+									function(d){
+										return (d.cityName == city && d.revType == "Property Tax Revenue")
+									}
+								))
+								.attr("class", "ptRevLine")
+								.attr("d", revLine)
 
 				svg.call(hover, path3); 
 
@@ -181,7 +186,7 @@
 				// Filtering large dataset down to just Boston MA for testing
 				var cityData = revDataset.filter(
 					function(d){
-						return d.cityName == "MA: Boston"
+						return d.cityName == city;
 					}
 				);
 
@@ -266,12 +271,13 @@
 		  
 				cities = cities.filter(onlyUnique);
 
-
+				
 
 
 				var select = d3.select('.filters-line-viz-1')
 					.append('select')
-						.attr('class','form-control')
+						.attr('class','form-control');
+
 
 			  
 			  	var options = select
@@ -280,7 +286,60 @@
 					.append('option')
 						.text(function (d) { return d; });
 
+				
+				d3.select('select').on("change", update);
 
+
+
+
+				function update() {
+
+					console.log(this.value);
+					var city = this.value;
+
+					cityData = revDataset.filter(
+							function(d){
+								return d.cityName == city;
+							}
+						);
+	
+					years = _.pluck(cityData, 'year');
+
+
+				svg.select('.genRevLine')
+						.datum(revDataset.filter(
+							function(d){
+								return (d.cityName == city && d.revType == "General Revenue")
+							}
+						))
+						.attr("d", revLine)
+
+				svg.call(hover, path1);
+
+				svg.select('.ownSourceRevLine')
+							.datum(revDataset.filter(
+								function(d){
+									return (d.cityName == city && d.revType == "Own Source Revenue")
+								}
+							))
+							.attr("d", revLine)
+
+				svg.call(hover, path2); 
+
+
+				svg.select('.ptRevLine')
+							.datum(revDataset.filter(
+								function(d){
+									return (d.cityName == city && d.revType == "Property Tax Revenue")
+								}
+							))
+							.attr("d", revLine)
+
+				svg.call(hover, path3); 
+
+				return city;
+
+				}
 
 				// var citySelectInput = jQuery(".filters-line-viz-1")
 				// .append('<select class="form-control"></select');
