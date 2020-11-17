@@ -14,7 +14,7 @@
 	var revDataset =[];
 
 	//starting city
-	var city = "MA: Boston";
+	var city = "AK: Anchorage";
 
 
 

@@ -17,12 +17,13 @@ Components
 
 @import 'components/blocks-ptc-section-view';
 @import 'components/blocks-ptc-section-sidenav';
-@import 'components/ptc-book-page-display.scss';
+@import 'components/ptc-book-page-display';
 
 
 /*-----------------------------------------
 Visualizations
 ------------------------------------------*/
 
-@import 'visualizations/visualizations.scss';
-@import 'visualizations/line-graph-1.scss';
+@import 'visualizations/visualizations';
+@import 'visualizations/line-graph-1';
+@import 'visualizations/pt-choropleth';

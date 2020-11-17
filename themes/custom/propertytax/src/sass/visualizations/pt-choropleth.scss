@@ -1,0 +1,29 @@
+ @import '../colors.scss';
+     
+ 
+    
+ #ptc-tooltip {
+    position: absolute;
+    width: 60px;
+    height: auto;
+    padding: 3px;
+    background-color: white;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+
+#ptc-tooltip.hidden {
+    display: none;
+}
+
+#ptc-tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 10px;
+    line-height: 12px;
+}
