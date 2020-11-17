@@ -2,13 +2,13 @@
 
 
 
-    {% for item in items %}
-      <div class="{{ item.content }}"></div>
-    {% endfor %}
+{% for item in items %}
+  <div class="{{ item.content }} visualization"></div>
 
-    <!-- Button trigger modal -->
+
+<!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
+  View Interactive Chart
 </button>
 
 <!-- Modal -->
@@ -16,7 +16,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Chart Title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -40,3 +40,4 @@
     </div>
   </div>
 </div>
+{% endfor %}

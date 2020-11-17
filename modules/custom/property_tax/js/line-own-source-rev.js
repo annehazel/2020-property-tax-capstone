@@ -25,7 +25,7 @@
 
 
 	//Load in data
-	d3.csv("https://dev-propertytaxcenter.pantheonsite.io/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
+	d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
 		function(data) {
 
 		var dataset = data;
@@ -55,9 +55,6 @@
 
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
-
-				
-		//console.log(revDataset);
 
 
 
@@ -102,7 +99,7 @@
 					Line Generators
 				------------------------------------*/
 
-				//Define line generators
+				//Define line generator
 				revLine = d3.line()
 					.x(function(d) { 
 						return xScale(d.year); 
@@ -111,21 +108,6 @@
 						return yScale(d.amount); 
 					});
 
-				// ownSourceRevLine = d3.line()
-				// 	.x(function(d) { 
-				// 		return xScale(d.year); 
-				// 	})
-		    	// 	.y(function(d) { 
-				// 		return yScale(d.ownSourceRev); 
-				// 	});
-
-				// ptRevLine = d3.line()
-				// 	.x(function(d) { 
-				// 		return xScale(d.year); 
-				// 	})
-				// 	.y(function(d) { 
-				// 		return yScale(d.ptRev); 
-				// 	});
 
 
 				/* ---------------------------------
@@ -161,7 +143,7 @@
 								.attr("class", "genRevLine")
 								.attr("d", revLine)
 
-				svg.call(hover, path1); // testing new 'hover' functionality
+				svg.call(hover, path1);
 			
 
 				//Create ownSourceRevLine for single city (Own Source Revenue)
@@ -174,7 +156,7 @@
 								.attr("class", "genRevLine")
 								.attr("d", revLine)
 
-				svg.call(hover, path2); // testing new 'hover' functionality
+				svg.call(hover, path2); 
 
 
 				const path3 = svg.append("path")
@@ -186,7 +168,7 @@
 				.attr("class", "genRevLine")
 				.attr("d", revLine)
 
-				svg.call(hover, path3); // testing new 'hover' functionality
+				svg.call(hover, path3); 
 
 
 
@@ -203,20 +185,8 @@
 					}
 				);
 
-				
 				var years = _.pluck(cityData, 'year');
 
-				// for (i = 0; i < cityData.length; i++) {
-				// 	cityData[i].year = formatTime(cityData[i].year);
-				// }
-
-
-
-	
-				console.log(years);
-
-				//console.log("full dataset = ", dataset)
-				//console.log("Boston dataset = ", newData);
 
 
 
@@ -249,45 +219,24 @@
 					function moved(event) {
 						event.preventDefault();
 						const pointer = d3.pointer(event, this);
-						// pointer gives back array of [x,y] position on the screen
 						const xm = xScale.invert(pointer[0]);
-						// xm should store the date/year value associated with pointer position
 						const ym = yScale.invert(pointer[1]);
-						// ym should store the value associated with pointer position
 						const i = d3.bisectCenter(years, xm);
-						//const year = formatTime(dates[i]);
-						// i should be the index of the closest year value in cityData
-						// figure out what year i is
-						console.log(i);
 						var yearData = cityData.filter(
 							function(d){
-								// console.log("d.year = ", d.year);
-								// console.log("years[i] = ", years[i]);
-
-								// if(d.year == years[i]) {
-								// 	console.log("True");
-								// } else {
-								// 	console.log("False");
-								// }
-
 								return formatTime(d.year) == formatTime(years[i]);
 							}
 						)
 
-						console.log("yearData = ", yearData);
-
 						const s = d3.least(yearData, function(d) { 
-							//console.log(d.amount);
 							return Math.abs(d.amount - ym);
 						});
 
-						//s.year = new Date(s.year, 0, 1);
 						// path.attr("stroke", function(d){ 
 						// 	d === s ? null : "#ddd"
 						// })
 						//.filter(function(d) { d === s}).raise();
 						dot.attr("transform", `translate(${xScale(s.year)},${yScale(s.amount)})`);
-						//dot.attr("transform", `translate(${xScale(dates[i])},${yScale(s.genRev[i])})`);
 						dot.select("text").text(s.cityName + " " + s.revType + " " + s.amount);
 					}
 						
@@ -302,6 +251,56 @@
 					}
 				}
 						
+
+
+
+				var cities = [];
+
+				for (i = 0; i < revDataset.length; i++) {
+				  cities.push(revDataset[i].cityName);
+				}
+		  
+				function onlyUnique(value, index, self) {
+				  return self.indexOf(value) === index;
+				}
+		  
+				cities = cities.filter(onlyUnique);
+
+
+
+
+				var select = d3.select('.filters-line-viz-1')
+					.append('select')
+						.attr('class','form-control')
+
+			  
+			  	var options = select
+					.selectAll('option')
+					.data(cities).enter()
+					.append('option')
+						.text(function (d) { return d; });
+
+
+
+				// var citySelectInput = jQuery(".filters-line-viz-1")
+				// .append('<select class="form-control"></select');
+
+				// console.log(citySelectInput.html());
+
+				// for (i=0; i < cities.length; i++ ){
+
+				// 	jQuery(citySelectInput).append(
+				// 		'<option>' + cities[i] +'</option>'
+				// 	);
+				// }
+
+
+
+				// console.log(citySelectInput.html());
+
+	
+
+
 
 
 			});

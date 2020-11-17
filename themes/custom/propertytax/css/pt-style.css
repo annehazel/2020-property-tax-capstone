@@ -30,6 +30,10 @@ article.ptc-landing-page div.content {
   max-width: 80%;
 }
 
+article.ptc-book-page div.content h3 {
+  margin-bottom: 1.5em;
+}
+
 /*-----------------------------------------
 Components
 ------------------------------------------*/
@@ -124,10 +128,14 @@ nav.ptc-page-nav-bottom .nextpage {
 /*-----------------------------------------
 Visualizations
 ------------------------------------------*/
+.visualization {
+  padding: 2em 1em;
+}
+
 .genRevLine, .ownSourceRevLine, .ptRevLine {
   fill: none;
   stroke: teal;
-  stroke-width: 0.5;
+  stroke-width: 0.8;
 }
 
 .axis path,
