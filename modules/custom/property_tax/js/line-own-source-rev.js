@@ -21,10 +21,11 @@
 			
 	// Function to convert Dates to strings
 	var formatTime = d3.timeFormat("%Y");
+	var parseTime = d3.timeParse("%Y");
 
 
 	//Load in data
-	d3.csv("https://propertytaxcenter.lndo.site/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
+	d3.csv("https://dev-propertytaxcenter.pantheonsite.io/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv",
 		function(data) {
 
 		var dataset = data;
@@ -56,7 +57,7 @@
 			}).then(function(dataset) {
 
 				
-		
+		//console.log(revDataset);
 
 
 
@@ -202,10 +203,18 @@
 					}
 				);
 
-					console.log(cityData);
-					
+				
 				var years = _.pluck(cityData, 'year');
-				//var values = _.pluck(newData, 'genRev');
+
+				// for (i = 0; i < cityData.length; i++) {
+				// 	cityData[i].year = formatTime(cityData[i].year);
+				// }
+
+
+
+	
+				console.log(years);
+
 				//console.log("full dataset = ", dataset)
 				//console.log("Boston dataset = ", newData);
 
@@ -249,9 +258,19 @@
 						//const year = formatTime(dates[i]);
 						// i should be the index of the closest year value in cityData
 						// figure out what year i is
+						console.log(i);
 						var yearData = cityData.filter(
 							function(d){
-								return d.year == years[i];
+								// console.log("d.year = ", d.year);
+								// console.log("years[i] = ", years[i]);
+
+								// if(d.year == years[i]) {
+								// 	console.log("True");
+								// } else {
+								// 	console.log("False");
+								// }
+
+								return formatTime(d.year) == formatTime(years[i]);
 							}
 						)
 
@@ -261,8 +280,8 @@
 							//console.log(d.amount);
 							return Math.abs(d.amount - ym);
 						});
-						//console.log("s = ", s);
-						
+
+						//s.year = new Date(s.year, 0, 1);
 						// path.attr("stroke", function(d){ 
 						// 	d === s ? null : "#ddd"
 						// })
