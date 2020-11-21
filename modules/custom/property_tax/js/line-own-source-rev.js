@@ -12,6 +12,7 @@
 	// Setup variables
 	var dataset, xScale, yScale, xAxis, yAxis, line;
 	var revDataset =[];
+	var avgDataset =[];
 
 	//starting city
 	var city = "AK: Anchorage";

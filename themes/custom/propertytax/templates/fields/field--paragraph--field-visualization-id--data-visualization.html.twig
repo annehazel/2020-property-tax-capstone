@@ -23,10 +23,14 @@
       </div>
       <div class="modal-body">
 
-        {% for item in items %}
-          <div class="{{ item.content }}"></div>
+      {% for item in items %}
+        <div class="container-fluid">
+            <div class="row h-100">
+            <div class="col-md-6 {{ item.content }}"></div>
+            <div class="col-md-3 ml-auto modal-input filters-{{ item.content }}"></div>
+        </div>
 
-          <div class="modal-input filters-{{ item.content }}"></div>
+
 
         {% endfor %}
 

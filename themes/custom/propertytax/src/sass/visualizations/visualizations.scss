@@ -5,3 +5,49 @@
     padding: 2em 1em;
 
 }
+
+
+
+
+/* Modal Styling */
+
+
+.modal-content {
+    @media (min-width: 992px) { 
+
+        min-width: 1000px;
+       
+    }
+
+    .container-fluid {
+        min-height: 500px;
+
+
+        div.row {
+
+            height: 100%;
+            width: 100%;
+            
+        }
+
+    }
+
+}
+
+
+.modal-dialog {
+
+    margin-left: 10%;
+
+
+}
+
+.modal-input {
+    position: relative;
+    float: right;
+    height: 100%;
+
+
+}
+
+

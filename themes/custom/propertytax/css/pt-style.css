@@ -143,6 +143,30 @@ Visualizations
   padding: 2em 1em;
 }
 
+/* Modal Styling */
+@media (min-width: 992px) {
+  .modal-content {
+    min-width: 1000px;
+  }
+}
+.modal-content .container-fluid {
+  min-height: 500px;
+}
+.modal-content .container-fluid div.row {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-dialog {
+  margin-left: 10%;
+}
+
+.modal-input {
+  position: relative;
+  float: right;
+  height: 100%;
+}
+
 .genRevLine, .ownSourceRevLine, .ptRevLine {
   fill: none;
   stroke-width: 1.5;
