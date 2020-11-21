@@ -2,9 +2,9 @@
      
  
     
-    .genRevLine, .ownSourceRevLine, .ptRevLine {
+    .genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities {
         fill: none;
-        stroke-width: 1.5;
+        stroke-width: 2;
     }
 
     .genRevLine  {
@@ -19,6 +19,22 @@
         stroke: $lincoln-purple;
     }
 
+
+    .avgAllCities {
+        stroke: $lincoln-green;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     .axis path,
     .axis line {
         fill: none;
@@ -30,30 +46,30 @@
         display: none;
     }
 
-    .line {
-        fill: none;
-        stroke: steelblue;
-        stroke-width: 1.5px;
-    }
+    // .line {
+    //     fill: none;
+    //     stroke: steelblue;
+    //     stroke-width: 1.5px;
+    // }
 
-    .overlay {
-        fill: none;
-        pointer-events: all;
-    }
+    // .overlay {
+    //     fill: none;
+    //     pointer-events: all;
+    // }
 
-    .focus circle {
-        fill: steelblue;
-    }
+    // .focus circle {
+    //     fill: steelblue;
+    // }
 
-    .focus text {
-        font-size: 14px;
-    }
+    // .focus text {
+    //     font-size: 14px;
+    // }
 
-    .tooltip {
-        fill: white;
-        stroke: #000;
-    }
+    // .tooltip {
+    //     fill: white;
+    //     stroke: #000;
+    // }
 
-    .tooltip-date, .tooltip-likes {
-        font-weight: bold;
-    }
+    // .tooltip-date, .tooltip-likes {
+    //     font-weight: bold;
+    // }

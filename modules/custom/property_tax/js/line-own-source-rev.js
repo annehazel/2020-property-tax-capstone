@@ -11,6 +11,7 @@
 
 	// Setup variables
 	var dataset, xScale, yScale, xAxis, yAxis, line;
+	var originalDataset =[];
 	var revDataset =[];
 	var avgDataset =[];
 
@@ -34,7 +35,7 @@
 
 		var dataset = data;
 
-		revDataset.push({
+		originalDataset.push({
 			cityId: dataset.id_city,
 			cityName: dataset.city_name,
 			year: new Date(dataset.year, 0, 1),
@@ -55,12 +56,36 @@
 		});
 
 
-		return revDataset;
+		return originalDataset;
 
 			// Make sure data is loaded before processing
 			}).then(function(dataset) {
 
 
+				/* ---------------------------------
+					Create separate Average dataset
+				------------------------------------*/
+
+
+				avgDataset = originalDataset.filter(
+					function(d){
+						return (d.cityName == "Average for All Cities" || 
+						d.cityName == "Average for Core FiSCs" || 
+						d.cityName == "Average for Legacy Cities");
+					}
+				);
+
+
+				revDataset = originalDataset.filter(
+					function(d){
+						return (d.cityName != "Average for All Cities" && 
+						d.cityName != "Average for Core FiSCs" && 
+						d.cityName != "Average for Legacy Cities");
+					}
+				);
+
+				//console.log(avgDataset);
+				//console.log(revDataset);
 
 
 				/* ---------------------------------
@@ -179,20 +204,64 @@
 
 
 
+				// Create All Cities Average Lines
+				var avgAllCitiesGenRev = svg.append("path")
+								.datum(avgDataset.filter(
+									function(d){
+										return (d.cityName == "Average for All Cities" && d.revType == "General Revenue")
+									}
+								))
+								.attr("class", "genRevLine")
+								.style("stroke-dasharray", ("3, 3"))
+								.attr("d", revLine)
+
+				svg.call(hover, avgAllCitiesGenRev); 
+
+
+				var avgAllCitiesOwnSource = svg.append("path")
+								.datum(avgDataset.filter(
+									function(d){
+										return (d.cityName == "Average for All Cities" && d.revType == "Own Source Revenue")
+									}
+								))
+								.attr("class", "ownSourceRevLine")
+								.style("stroke-dasharray", ("3, 3"))
+								.attr("d", revLine)
+
+				svg.call(hover, avgAllCitiesOwnSource); 
+
+
+				var avgAllCitiesPT = svg.append("path")
+								.datum(avgDataset.filter(
+									function(d){
+										return (d.cityName == "Average for All Cities" && d.revType == "Property Tax Revenue")
+									}
+								))
+								.attr("class", "ptRevLine")
+								.style("stroke-dasharray", ("3, 3"))
+								.attr("d", revLine)
+
+				svg.call(hover, avgAllCitiesPT); 
+
+
+
+
+
 				/* ---------------------------------
 					Hover / Tooltip Functionality
 				------------------------------------*/
 
 
-				// Filtering large dataset down to just Boston MA for testing
-				var cityData = revDataset.filter(
+				// Filtering large dataset down to just current city
+
+				var cityData = originalDataset.filter(
 					function(d){
 						return d.cityName == city;
 					}
 				);
 
+				console.log(cityData);
 				var years = _.pluck(cityData, 'year');
-
 
 
 
@@ -238,10 +307,6 @@
 							return Math.abs(d.amount - ym);
 						});
 
-						// path.attr("stroke", function(d){ 
-						// 	d === s ? null : "#ddd"
-						// })
-						//.filter(function(d) { d === s}).raise();
 						dot.attr("transform", `translate(${xScale(s.year)},${yScale(s.amount)})`);
 						dot.select("text").text(s.cityName + " " + s.revType + " " + s.amount);
 					}
@@ -341,22 +406,6 @@
 				return city;
 
 				}
-
-				// var citySelectInput = jQuery(".filters-line-viz-1")
-				// .append('<select class="form-control"></select');
-
-				// console.log(citySelectInput.html());
-
-				// for (i=0; i < cities.length; i++ ){
-
-				// 	jQuery(citySelectInput).append(
-				// 		'<option>' + cities[i] +'</option>'
-				// 	);
-				// }
-
-
-
-				// console.log(citySelectInput.html());
 
 	
 

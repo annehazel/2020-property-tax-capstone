@@ -167,9 +167,9 @@ Visualizations
   height: 100%;
 }
 
-.genRevLine, .ownSourceRevLine, .ptRevLine {
+.genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities {
   fill: none;
-  stroke-width: 1.5;
+  stroke-width: 2;
 }
 
 .genRevLine {
@@ -184,6 +184,10 @@ Visualizations
   stroke: #6C6A80;
 }
 
+.avgAllCities {
+  stroke: #92C82A;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -193,34 +197,6 @@ Visualizations
 
 .x.axis path {
   display: none;
-}
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.overlay {
-  fill: none;
-  pointer-events: all;
-}
-
-.focus circle {
-  fill: steelblue;
-}
-
-.focus text {
-  font-size: 14px;
-}
-
-.tooltip {
-  fill: white;
-  stroke: #000;
-}
-
-.tooltip-date, .tooltip-likes {
-  font-weight: bold;
 }
 
 #ptc-tooltip {
