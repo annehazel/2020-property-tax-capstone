@@ -2,15 +2,17 @@
 
 
 div.region-sidebar-first {
+    
+    #block-explorethedata, #block-learn {
 
-    background-color: $lincoln-lightblue;
+        background-color: $lincoln-lightblue;
 
         @media (min-width: 992px) { 
  
             min-height: 600px;
 
         }
-    
+        
         h2 {
             font-size: large;
             padding: 10px 15px;
@@ -24,32 +26,5 @@ div.region-sidebar-first {
         }
 
 
-}
-
-#block-centersections {
-
- ul{
-
-    li {
-
-        display: none;
-
-        &.active {
-
-            font-weight: bold;
-            display: block;
-
-        }
-
-        &.inactive {
-
-            display: block;
-
-            
-        }
-
     }
-
- }
-
 }
