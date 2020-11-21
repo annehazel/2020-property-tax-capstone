@@ -10,6 +10,7 @@ ptc:
   js:
     js/line-own-source-rev.js: {}
     js/pt-choropleth.js: {}
+    js/ptc-menu.js: {}
   dependencies:
       - core/jquery
       - core/jquery.once
