@@ -3,7 +3,7 @@
 
 div.region-sidebar-first {
     
-    #block-explorethedata, #block-learn {
+   
 
         background-color: $lincoln-lightblue;
 
@@ -26,5 +26,27 @@ div.region-sidebar-first {
         }
 
 
-    }
+        nav#block-centersections {
+
+            li{
+
+                display: none; 
+
+                &.active {
+
+                    display: block;
+
+                }
+
+
+
+            }
+
+
+        }
+
+
+
+
+
 }
