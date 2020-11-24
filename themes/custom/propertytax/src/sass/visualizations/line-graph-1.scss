@@ -2,9 +2,10 @@
      
  
     
-    .genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities {
+    .genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities, .ptRevLine1 {
         fill: none;
         stroke-width: 2;
+        stroke: $lincoln-green2;
     }
 
     .genRevLine  {
@@ -18,7 +19,6 @@
     .ptRevLine  {
         stroke: $lincoln-purple;
     }
-
 
     .avgAllCities {
         stroke: $lincoln-green;

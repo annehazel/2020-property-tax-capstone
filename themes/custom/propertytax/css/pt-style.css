@@ -167,9 +167,10 @@ Visualizations
   height: 100%;
 }
 
-.genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities {
+.genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities, .ptRevLine1 {
   fill: none;
   stroke-width: 2;
+  stroke: #008A77;
 }
 
 .genRevLine {

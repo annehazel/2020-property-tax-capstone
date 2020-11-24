@@ -15,6 +15,7 @@
 	var revDataset =[];
 	var avgDataset =[];
 
+
 	//starting city
 	var city = "AK: Anchorage";
 
@@ -138,7 +139,8 @@
 						return yScale(d.amount); 
 					});
 
-
+				// var triLine = d3.svg.symbol().type('triangle-up')
+				// 	.size(function(d){ return scale(d); });
 
 				/* ---------------------------------
 					Draw the SVG
@@ -244,7 +246,33 @@
 				svg.call(hover, avgAllCitiesPT); 
 
 
+				//
+				var avgFiscCitiesPT = svg.append("path")
+								.datum(avgDataset.filter(
+									function(d){
+										return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
+									}
+								))
+								.attr("class", "ptRevLine1")
+								.attr("d", revLine);
 
+				
+				
+				// Individual points
+				// svg.selectAll(".ptRevLine1")
+				// 	.datum(avgDataset.filter(
+				// 		function(d){
+				// 			return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
+				// 		}
+				// 	))
+				// 	.enter()
+				// 	.append("path")
+				// 	.attr("d", d3.symbol().type("triangle-up"))
+				// 	.attr("transform", function(d) {
+				// 		return "translate(" + x(d.year) + "," + y(d.amount) + ")";
+				// 		});
+
+				svg.call(hover, avgFiscCitiesPT); 
 
 
 				/* ---------------------------------
@@ -353,12 +381,12 @@
 						.text(function (d) { return d; });
 
 				
-				d3.select('select').on("change", update);
+				d3.select('select').on("change", updateCity);
 
 
 
 
-				function update() {
+				function updateCity() {
 
 					console.log(this.value);
 					var city = this.value;
