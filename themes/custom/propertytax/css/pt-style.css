@@ -90,7 +90,7 @@ div.region-sidebar-first {
 }
 @media (min-width: 992px) {
   div.region-sidebar-first {
-    min-height: 600px;
+    min-height: 800px;
   }
 }
 div.region-sidebar-first h2 {
@@ -100,11 +100,28 @@ div.region-sidebar-first h2 {
 div.region-sidebar-first a {
   color: black;
 }
+div.region-sidebar-first nav#block-centersections ul {
+  display: flex;
+  flex-direction: column;
+}
 div.region-sidebar-first nav#block-centersections li {
   display: none;
+  order: 1;
 }
-div.region-sidebar-first nav#block-centersections li.active {
+div.region-sidebar-first nav#block-centersections li.active-trail {
+  position: relative;
+  order: 0;
   display: block;
+}
+div.region-sidebar-first nav#block-centersections ul.expanded li {
+  display: block;
+}
+div.region-sidebar-first nav#block-centersections ul.expanded li:not(.active-trail) {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  background-color: #eeeeee;
+  width: 100%;
 }
 
 /* main content area*/

@@ -9,7 +9,7 @@ div.region-sidebar-first {
 
         @media (min-width: 992px) { 
  
-            min-height: 600px;
+            min-height: 800px;
 
         }
         
@@ -27,23 +27,46 @@ div.region-sidebar-first {
 
 
         nav#block-centersections {
+            ul {
+                display: flex;
+                flex-direction: column;
+            }
 
             li{
 
                 display: none; 
+                order: 1;
 
-                &.active {
+                &.active-trail {
+                    position: relative;
+                    order: 0;
 
                     display: block;
 
                 }
 
+            }
+
+
+            ul.expanded {
+
+                li {
+                    &:not(.active-trail) {
+                        position: absolute;
+                        z-index: 10;
+                        top: 100%;
+                        background-color: #eeeeee;
+                        width: 100%;
+                    }
+
+                    display: block;
+                }
 
 
             }
 
-
         }
+
 
 
 
