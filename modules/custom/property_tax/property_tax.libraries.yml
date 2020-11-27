@@ -3,8 +3,17 @@ d3:
   js:
     js/vendor/d3.min.js: {}
 
-
-
+chosen:
+  version: v1.8.7
+  js:
+    js/vendor/chosen.jquery.min.js: {}
+  css:
+    theme:
+      css/vendor/chosen.min.css: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.once
+      
 ptc:
   version: 1
   js:
