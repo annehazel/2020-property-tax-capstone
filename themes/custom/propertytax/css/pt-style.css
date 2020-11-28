@@ -188,6 +188,12 @@ Visualizations
   height: 100%;
 }
 
+.modal-header-logo {
+  width: 25%;
+  height: 25%;
+  margin-bottom: 3em;
+}
+
 .genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities, .ptRevLine1 {
   fill: none;
   stroke-width: 2;
