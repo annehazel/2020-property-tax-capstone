@@ -160,6 +160,10 @@ Visualizations
   padding: 2em 1em;
 }
 
+.showElement {
+  visibility: visible;
+}
+
 /* Modal Styling */
 @media (min-width: 992px) {
   .modal-content {

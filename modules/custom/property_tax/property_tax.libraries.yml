@@ -13,13 +13,14 @@ chosen:
   dependencies:
       - core/jquery
       - core/jquery.once
-      
+
 ptc:
   version: 1
   js:
     js/line-own-source-rev.js: {}
     js/pt-choropleth.js: {}
-    js/ptc-menu.js: {}
+    js/ptc-menus-inputs.js: {}
+    js/ptc-viz-inputs.js: {}
   dependencies:
       - core/jquery
       - core/jquery.once

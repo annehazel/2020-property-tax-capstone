@@ -207,17 +207,18 @@
 
 
 				// Create All Cities Average Lines
-				var avgAllCitiesGenRev = svg.append("path")
+				var v = svg.append("path")
 								.datum(avgDataset.filter(
 									function(d){
 										return (d.cityName == "Average for All Cities" && d.revType == "General Revenue")
 									}
 								))
 								.attr("class", "genRevLine")
+								.attr("id", "avgAllCitiesGenRev")
 								.style("stroke-dasharray", ("3, 3"))
-								.attr("d", revLine)
+								.attr("d", revLine);
 
-				svg.call(hover, avgAllCitiesGenRev); 
+
 
 
 				var avgAllCitiesOwnSource = svg.append("path")
@@ -228,9 +229,8 @@
 								))
 								.attr("class", "ownSourceRevLine")
 								.style("stroke-dasharray", ("3, 3"))
-								.attr("d", revLine)
+								.attr("d", revLine);
 
-				svg.call(hover, avgAllCitiesOwnSource); 
 
 
 				var avgAllCitiesPT = svg.append("path")
@@ -241,38 +241,22 @@
 								))
 								.attr("class", "ptRevLine")
 								.style("stroke-dasharray", ("3, 3"))
-								.attr("d", revLine)
-
-				svg.call(hover, avgAllCitiesPT); 
-
-
-				//
-				var avgFiscCitiesPT = svg.append("path")
-								.datum(avgDataset.filter(
-									function(d){
-										return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
-									}
-								))
-								.attr("class", "ptRevLine1")
 								.attr("d", revLine);
 
-				
-				
-				// Individual points
-				// svg.selectAll(".ptRevLine1")
-				// 	.datum(avgDataset.filter(
-				// 		function(d){
-				// 			return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
-				// 		}
-				// 	))
-				// 	.enter()
-				// 	.append("path")
-				// 	.attr("d", d3.symbol().type("triangle-up"))
-				// 	.attr("transform", function(d) {
-				// 		return "translate(" + x(d.year) + "," + y(d.amount) + ")";
-				// 		});
 
-				svg.call(hover, avgFiscCitiesPT); 
+
+
+
+				// var avgFiscCitiesPT = svg.append("path")
+				// 				.datum(avgDataset.filter(
+				// 					function(d){
+				// 						return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
+				// 					}
+				// 				))
+				// 				.attr("class", "ptRevLine1")
+				// 				.attr("d", revLine);
+
+				// svg.call(hover, avgFiscCitiesPT); 
 
 
 				/* ---------------------------------
@@ -351,7 +335,7 @@
 				}
 						
 
-
+				// Get unique city list for input
 
 				var cities = [];
 
@@ -366,12 +350,11 @@
 				cities = cities.filter(onlyUnique);
 
 				
-
+				//Create Select input
 
 				var select = d3.select('.filters-line-viz-1')
 					.append('select')
-						.attr('class','form-control');
-
+						.attr('class','form-control cities-list');
 
 			  
 			  	var options = select
@@ -380,11 +363,15 @@
 					.append('option')
 						.text(function (d) { return d; });
 
+
+				// jQuery('.cities-list').chosen(
+				// 	{disable_search_threshold: 10}
+				// 	);
 				
+
+				// Handle select input update
+
 				d3.select('select').on("change", updateCity);
-
-
-
 
 				function updateCity() {
 
@@ -438,6 +425,86 @@
 	
 
 
+
+				// Average Lines Inputs
+
+				var avgGenRevInput = d3.select('.filters-line-viz-1')
+							.append('div')
+								.attr('class','form-check')
+								.attr('id','avgGenRevInputDiv')
+							.append('input')
+								.attr('type','checkbox')
+								.attr('class','form-check-input')
+								.attr('id','avgGenRevInput')
+								.on('click', function(){
+									// determine if current line is visible
+									var active   = avgAllCitiesGenRev.active ? false : true,
+									newOpacity = active ? 0 : 1;
+									// hide or show the elements
+									d3.select('path#avgAllCitiesGenRev').style('opacity', newOpacity);
+									// update whether or not the elements are active
+									avgAllCitiesGenRev.active = active;
+								});
+
+				d3.select('#avgGenRevInputDiv')
+					.append('label')
+						.attr('for','avgGenRevInput')
+						.attr('class','form-check-label')
+						.text('Average General Revenue');
+
+
+				var avgOwnSourceInput = d3.select('.filters-line-viz-1')
+							.append('div')
+								.attr('class','form-check')
+								.attr('id','avgOwnSourceInputDiv')
+							.append('input')
+								.attr('type','checkbox')
+								.attr('class','form-check-input')
+								.attr('id','avgOwnSourceInput');
+								
+
+				d3.select('#avgOwnSourceInputDiv')
+					.append('label')
+						.attr('for','avgOwnSourceInput')
+						.attr('class','form-check-label')
+						.text('Average Own Source Revenue');
+
+
+				var avgPtInput = d3.select('.filters-line-viz-1')
+						.append('div')
+							.attr('class','form-check')
+							.attr('id','avgPtInputDiv')
+						.append('input')
+							.attr('type','checkbox')
+							.attr('class','form-check-input')
+							.attr('id','avgPtInput');
+							
+
+				d3.select('#avgPtInputDiv')
+					.append('label')
+						.attr('for','avgPtInput')
+						.attr('class','form-check-label')
+						.text('Average Property Tax Revenue');
+
+
+
+
+				// d3.select("#avgGenRevInput")
+				// 		.on("click", function(){
+				// 		console.log("Here for Gen Rev");
+				// });
+
+
+				// d3.select("#avgOwnSourceInput")
+				// 		.on("click", function(){
+				// 		console.log("Here for Own Source Rev");
+				// });
+
+
+				// d3.select("#avgPtInput")
+				// 		.on("click", function(){
+				// 		console.log("Here for PT Rev");
+				// });
 
 
 			});
