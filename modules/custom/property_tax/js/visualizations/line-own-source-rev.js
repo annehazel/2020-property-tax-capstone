@@ -3,14 +3,15 @@
 	/* ---------------------------------
 		Initial Setup
 	------------------------------------*/
-			
+	import * as d3Legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
+
 	// Set width and height for SVG area
 	var w = 500;
 	var h = 300;
 	var padding = 40;
 
 	// Setup variables
-	var dataset, xScale, yScale, xAxis, yAxis, line;
+	var dataset, xScale, yScale, xAxis, yAxis, revLine;
 	var originalDataset =[];
 	var revDataset =[];
 	var avgDataset =[];
@@ -339,7 +340,7 @@
 
 				var cities = [];
 
-				for (i = 0; i < revDataset.length; i++) {
+				for (var i = 0; i < revDataset.length; i++) {
 				  cities.push(revDataset[i].cityName);
 				}
 		  
@@ -506,6 +507,9 @@
 				// 		console.log("Here for PT Rev");
 				// });
 
+				swatches({
+					color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
+				  })
 
 			});
 
