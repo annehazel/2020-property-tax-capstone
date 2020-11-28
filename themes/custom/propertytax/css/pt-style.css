@@ -194,6 +194,34 @@ Visualizations
   margin-bottom: 3em;
 }
 
+@media screen {
+  #printSection {
+    display: none;
+  }
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printSection, #printSection * {
+    visibility: visible;
+  }
+
+  #printSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .hideOnPrint {
+    display: none;
+  }
+
+  .modal-header, .modal-footer, .modal-content {
+    border: 0px;
+  }
+}
 .genRevLine, .ownSourceRevLine, .ptRevLine, .avgAllCities, .ptRevLine1 {
   fill: none;
   stroke-width: 2;

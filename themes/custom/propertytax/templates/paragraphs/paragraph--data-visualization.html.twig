@@ -63,11 +63,11 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      <img class="modal-header-logo" src="/sites/default/files/2020-11/LILP_LogoHorizontal_CMYK.png"/>
+    <div class="modal-content" id="printThis">
+      <div class="modal-header" >
+        <img class="modal-header-logo" src="/sites/default/files/2020-11/LILP_LogoHorizontal_CMYK.png"/>
         <h4 class="modal-title" id="exampleModalLongTitle">{{content.field_chart_title}}</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close hideOnPrint" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -76,13 +76,13 @@
         <div class="container-fluid">
             <div class="row h-100">
             <div class="col-md-6 {{ content.field_visualization_id.0 }}"></div>
-            <div class="col-md-4 ml-auto modal-input filters-{{ content.field_visualization_id.0}}"></div>
+            <div class="col-md-4 ml-auto modal-input filters-{{ content.field_visualization_id.0}} hideOnPrint"></div>
         </div>
 
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer hideOnPrint">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save to PDF</button>
+        <button type="button" id="btnPrint" class="btn btn-primary">Save to PDF</button>
       </div>
     </div>
   </div>
