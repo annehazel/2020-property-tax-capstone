@@ -3,7 +3,8 @@
 	/* ---------------------------------
 		Initial Setup
 	------------------------------------*/
-	import * as d3Legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
+	import * as legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
+	//import {swatches} from "/modules/custom/property_tax/js/vendor/observable-legends.js"
 
 	// Set width and height for SVG area
 	var w = 500;
@@ -176,6 +177,7 @@
 								))
 								.attr("class", "genRevLine")
 								.attr("d", revLine)
+								.attr("data-legend",function(d) { return d.name});
 
 				svg.call(hover, path1);
 			
@@ -189,6 +191,7 @@
 								))
 								.attr("class", "ownSourceRevLine")
 								.attr("d", revLine)
+								.attr("data-legend",function(d) { return d.name});
 
 				svg.call(hover, path2); 
 
@@ -201,6 +204,7 @@
 								))
 								.attr("class", "ptRevLine")
 								.attr("d", revLine)
+								.attr("data-legend",function(d) { return d.name});
 
 				svg.call(hover, path3); 
 
@@ -258,6 +262,7 @@
 				// 				.attr("d", revLine);
 
 				// svg.call(hover, avgFiscCitiesPT); 
+
 
 
 				/* ---------------------------------
@@ -375,6 +380,8 @@
 				d3.select('select').on("change", updateCity);
 
 				function updateCity() {
+
+					console.log("change triggered");
 
 					console.log(this.value);
 					var city = this.value;
@@ -507,9 +514,39 @@
 				// 		console.log("Here for PT Rev");
 				// });
 
-				swatches({
-					color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
-				  })
+				
 
+				/* ---------------------------------
+					Legend
+				------------------------------------*/
+
+
+				 var ordinal = d3.scaleOrdinal()
+				 	.domain(["General Revenue", "Own Source Revenue", "Property Tax Revenue"])
+				 	.range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)"]);
+
+				 	svg.append("g")
+				 	.attr("class", "legendOrdinal")
+				 	.attr("transform", "translate(400,5)");
+
+				 	var legendOrdinal = d3.legendColor()
+				 	//d3 symbol creates a path-string, for example
+				 	//"M0,-8.059274488676564L9.306048591020996,
+				 	//8.059274488676564 -9.306048591020996,8.059274488676564Z"
+				 	.shape("path", d3.symbol().type(d3.symbolSquare).size(150)())
+				 	.shapePadding(10)
+				 	//use cellFilter to hide the "e" cell
+				 	.cellFilter(function(d){ return d.label !== "e" })
+				 	.scale(ordinal);
+
+				 	svg.select(".legendOrdinal")
+				 	.call(legendOrdinal);
+
+
+
+
+
+
+				
 			});
 
