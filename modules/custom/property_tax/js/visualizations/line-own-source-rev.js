@@ -87,10 +87,6 @@
 					}
 				);
 
-				//console.log(avgDataset);
-				//console.log(revDataset);
-
-
 				/* ---------------------------------
 					Setup Axes Scales & Formats
 				------------------------------------*/
@@ -278,7 +274,6 @@
 					}
 				);
 
-				console.log(cityData);
 				var years = _.pluck(cityData, 'year');
 
 
@@ -381,9 +376,6 @@
 
 				function updateCity() {
 
-					console.log("change triggered");
-
-					console.log(this.value);
 					var city = this.value;
 
 					cityData = revDataset.filter(

@@ -21,6 +21,7 @@ ptc:
   js:
     js/visualizations/line-own-source-rev.js: {attributes: {type: "module"}}
     js/visualizations/pt-choropleth.js: {}
+    js/visualizations/rev-heatmap.js: {}
     js/custom/ptc-menus-inputs.js: {}
     js/custom/ptc-viz-inputs.js: {}
   dependencies:

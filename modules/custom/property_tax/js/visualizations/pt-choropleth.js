@@ -21,7 +21,7 @@
 								//https://github.com/d3/d3-scale-chromatic
 
 			//Create SVG element
-			var svg = d3.selectAll(".line-viz-2")
+			var svgChoropleth = d3.selectAll(".line-viz-2")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -81,7 +81,7 @@
 
 					//console.log(json);
 					//Bind data and create one path per GeoJSON feature
-					svg.selectAll("path")
+					svgChoropleth.selectAll("path")
 					   .data(json.features)
 					   .enter()
 					   .append("path")
