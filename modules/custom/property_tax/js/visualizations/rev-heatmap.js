@@ -19,6 +19,8 @@ var svg = d3.select(".rev-heatmap")
   .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
+// Function to convert Dates to strings
+var formatTime = d3.timeFormat("%Y");
 
 
 d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", function(data) {
@@ -61,7 +63,6 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
       }
     );
 
-
     revDatasetRHP = originalDatasetRHP.filter(
       function(d){
         return (d.cityName != "Average for All Cities" && 
@@ -69,7 +70,6 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
         d.cityName != "Average for Legacy Cities");
       }
     );
-
 
     var currentState = "MA";
     var currentRev = "Property Tax Revenue";
@@ -82,32 +82,43 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
     );
 
 
-      console.log(varDatasetRHP);
 
-      // Get list of unique cities in dataset
-      //console.log(revDataset);
+  // Get list of unique cities in dataset
 
-      var cities = [];
+    var cities = [];
 
-      for (index = 0; index < varDatasetRHP.length; index++) {
-        cities.push(varDatasetRHP[index].cityName);
-      }
+    for (index = 0; index < varDatasetRHP.length; index++) {
+      cities.push(varDatasetRHP[index].cityName);
+    }
 
-      function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-      }
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
 
-      cities = cities.filter(onlyUnique);
+    cities = cities.filter(onlyUnique);
 
-      console.log(cities)
+  // Get list of unique years in dataset
 
-      // Build X scales and axis:
+  var years = [];
+  for (index = 0; index < varDatasetRHP.length; index++) {
+    years.push(formatTime(varDatasetRHP[index].year));
+  }
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+  years = years.filter(onlyUnique);
+
+
+
+
+  // Build X scales and axis:
+
       var x = d3.scaleTime()
-        .range([ 0, width ])
+        .rangeRound([0,width])
         .domain([
          d3.min(revDatasetRHP, function(d) { return d.year; }),
          d3.max(revDatasetRHP, function(d) { return d.year; })
-       ])
+       ]);
 
       svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -115,7 +126,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
       // Build X scales and axis:
       var y = d3.scaleBand()
-        .range([ cities.length*15, 0 ])
+        .range([ height, 0 ])
         .domain(cities)
 
       svg.append("g")
@@ -129,14 +140,16 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
            d3.max(varDatasetRHP, function(d) { return d.amount; })
          ])
 
+         console.log(varDatasetRHP.length);
+
         // Create the squares
         svg.selectAll()
           .data(varDatasetRHP)
           .enter()
           .append("rect")
-          .attr("x", function(d) { return x(d.year) })
+          .attr("x", function(d) { return x(d.year);})
           .attr("y", function(d) { return y(d.cityName) })
-          .attr("width", "15")
+          .attr("width", "5")
           .attr("height", y.bandwidth)
           .style("fill", function(d) { return myColor(d.amount)} )
 
