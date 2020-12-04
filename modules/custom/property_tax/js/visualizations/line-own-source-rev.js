@@ -3,8 +3,9 @@
 	/* ---------------------------------
 		Initial Setup
 	------------------------------------*/
-	import * as legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
-	//import {swatches} from "/modules/custom/property_tax/js/vendor/observable-legends.js"
+	//import {legend} from '../../../../../node_modules/d3-color-legend/dist/d3-color-legend.js';
+	//import * as legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
+	//import *  from "/modules/custom/property_tax/js/vendor/observable-legends.js"
 
 	// Set width and height for SVG area
 	var w = 500;
@@ -365,18 +366,22 @@
 						.text(function (d) { return d; });
 
 
-				// jQuery('.cities-list').chosen(
-				// 	{disable_search_threshold: 10}
-				// 	);
+				jQuery('.cities-list').chosen(
+					{disable_search_threshold: 10}
+				);
+				jQuery('select').on('change', function(evt, params) {
+					var city = jQuery(this).val();
+					updateCity(city);
+				});
 				
 
 				// Handle select input update
 
-				d3.select('select').on("change", updateCity);
+				// d3.select('select').on("change", updateCity);
 
-				function updateCity() {
+				function updateCity(city) {
 
-					var city = this.value;
+					// var city = this.value;
 
 					cityData = revDataset.filter(
 							function(d){
@@ -535,10 +540,15 @@
 				 	.call(legendOrdinal);
 
 
+		var legDiv = d3.selectAll(".line-viz-1")
+						.append("div")
+						.attr("class", "testLegend");
 
-
-
-
+					
+		swatches({
+				color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
+				})
 				
 			});
+
 

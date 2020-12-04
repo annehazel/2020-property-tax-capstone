@@ -2,8 +2,8 @@ d3:
   version: v6.2.0
   js:
     js/vendor/d3.min.js: {}
-    js/vendor/d3-legend.min.js: {attributes: {type: "module"}}
-    js/vendor/d3.legend.js: {}
+    js/vendor/d3-legend.min.js: {}
+    js/vendor/d3-legend-obs.js: {attributes: { type: "module"}}
 
 chosen:
   version: v1.8.7
@@ -16,11 +16,17 @@ chosen:
       - core/jquery
       - core/jquery.once
 
+
+d3-color-legend:
+  version: 1
+  js:
+    ../../../node_modules/d3-color-legend/dist/d3-color-legend.min.js: {}
+
+
 ptc:
   version: 1
   js:
-    js/visualizations/line-own-source-rev.js: {attributes: {type: "module"}}
-    js/visualizations/pt-choropleth.js: {}
+    js/visualizations/line-own-source-rev.js: {}
     js/visualizations/rev-heatmap.js: {}
     js/custom/ptc-menus-inputs.js: {}
     js/custom/ptc-viz-inputs.js: {}

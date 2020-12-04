@@ -1,6 +1,6 @@
 //import * as d3Legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
 
-export {legend, swatches, entity, ramp}
+
 
 
 
@@ -139,7 +139,7 @@ function legend({
     return svg.node();
   }
 
-function swatches({
+  function swatches({
     color,
     columns = null,
     format = x => x,

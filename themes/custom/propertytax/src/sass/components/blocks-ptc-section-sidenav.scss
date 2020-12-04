@@ -31,22 +31,24 @@ div.region-sidebar-first {
                 display: flex;
                 flex-direction: column;
             }
-
             li{
 
                 display: none; 
                 order: 1;
-
                 &.active-trail {
                     position: relative;
                     order: 0;
-
                     display: block;
-
+                    &:before {
+                        width: 0;
+                        height: 0;
+                        border-left: 50px solid transparent;
+                        border-right: 50px solid transparent;
+                        border-top: 100px solid red;
+                    }
                 }
 
             }
-
 
             ul.expanded {
 
@@ -58,14 +60,12 @@ div.region-sidebar-first {
                         background-color: #eeeeee;
                         width: 100%;
                     }
-
                     display: block;
                 }
-
-
             }
-
         }
+
+
 
 
 

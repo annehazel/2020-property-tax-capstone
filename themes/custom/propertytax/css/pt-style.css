@@ -19,6 +19,17 @@ div.region-navigation a.name.navbar-brand {
   padding-bottom: 2em;
 }
 
+.jumbotron {
+  min-height: 30em;
+  background-color: rbga(#0f9961, 0.5);
+}
+.jumbotron h1 {
+  font-size: 2em;
+}
+.jumbotron .lead {
+  font-size: 1.5em;
+}
+
 h1 {
   color: black;
 }
@@ -113,6 +124,13 @@ div.region-sidebar-first nav#block-centersections li.active-trail {
   order: 0;
   display: block;
 }
+div.region-sidebar-first nav#block-centersections li.active-trail:before {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+}
 div.region-sidebar-first nav#block-centersections ul.expanded li {
   display: block;
 }
@@ -186,6 +204,11 @@ Visualizations
   position: relative;
   float: right;
   height: 100%;
+}
+
+.chosen-container {
+  width: 100% !important;
+  margin-bottom: 20px;
 }
 
 .modal-header-logo {

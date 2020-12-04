@@ -22,3 +22,18 @@ div.region-navigation a.name.navbar-brand {
    padding-top: 1.5em;
    padding-bottom: 2em;
 }
+
+.jumbotron {
+
+    min-height: 30em;
+    background-color: rbga($green-option1, .5);
+
+    h1{
+    font-size: 2em;
+    }
+
+    .lead {
+        font-size: 1.5em;
+    }
+
+}
