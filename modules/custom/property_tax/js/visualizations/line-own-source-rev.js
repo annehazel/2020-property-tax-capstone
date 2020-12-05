@@ -164,7 +164,7 @@
 
 
 
-				// Create genRevLine for single city (General Revenue)
+				// Create rev lines for single city (General Revenue)
 
 				var path1 = svg.append("path")
 								.datum(revDataset.filter(
@@ -209,7 +209,7 @@
 
 
 				// Create All Cities Average Lines
-				var v = svg.append("path")
+				var path1a = svg.append("path")
 								.datum(avgDataset.filter(
 									function(d){
 										return (d.cityName == "Average for All Cities" && d.revType == "General Revenue")
@@ -223,7 +223,7 @@
 
 
 
-				var avgAllCitiesOwnSource = svg.append("path")
+				var path2a = svg.append("path")
 								.datum(avgDataset.filter(
 									function(d){
 										return (d.cityName == "Average for All Cities" && d.revType == "Own Source Revenue")
@@ -235,7 +235,7 @@
 
 
 
-				var avgAllCitiesPT = svg.append("path")
+				var path3a = svg.append("path")
 								.datum(avgDataset.filter(
 									function(d){
 										return (d.cityName == "Average for All Cities" && d.revType == "Property Tax Revenue")
@@ -352,14 +352,34 @@
 				cities = cities.filter(onlyUnique);
 
 				
-				//Create Select input
 
-				var select = d3.select('.filters-line-viz-1')
-					.append('select')
-						.attr('class','form-control cities-list');
+				//Create three columns within filters section
+
+				var inputCol1 = d3.select('.filters-line-viz-1')
+									.append("div")
+									.attr("class", "col-md-4 viz-input-col");
+
+				inputCol1.append("h5").text('Select a city:');
+
+				var inputCol2 = d3.select('.filters-line-viz-1')
+									.append("div")
+									.attr("class", "col-md-4 viz-input-col");
+
+				inputCol2.append("h5").text('Compare this city to:');
+
+				var inputCol3 = d3.select('.filters-line-viz-1')
+									.append("div")
+									.attr("class", "col-md-4 viz-input-col");
+
+				inputCol3.append("h5").text('Select an option:');
+
+				//Create main city select input (col 1)
+
+				var mainSelect = inputCol1.append('select')
+										.attr('class','form-control cities-list');
 
 			  
-			  	var options = select
+			  	var options = mainSelect
 					.selectAll('option')
 					.data(cities).enter()
 					.append('option')
@@ -373,59 +393,123 @@
 					var city = jQuery(this).val();
 					updateCity(city);
 				});
+
+
+
+				//Create compare option input (col 2)
 				
+				var compareLabel1 = inputCol2.append('div')
+											.attr('class','radio')
+											.append('label');
+
+				compareLabel1.append('input')
+							.attr('type', 'radio')
+							.attr('name', 'compareOptions')
+							.attr('value', 'city');
+
+				compareLabel1.append('text').text('Another City');
+
+
+
+				var compareLabel2 = inputCol2.append('div')
+											.attr('class','radio')
+											.append('label');
+
+				compareLabel2.append('input')
+							.attr('type', 'radio')
+							.attr('name', 'compareOptions')
+							.attr('value', 'average');
+
+				compareLabel2.append('text').text('Average Data');
+
+
+
+
+				//Create second city option input (col 3, option 1)
+
+				var optionSelect = inputCol3.append('div')
+										.attr('class','second-city')
+										.append('select')
+										.attr('class','form-control cities-list-option2');
+
+			  
+			  	optionSelect.selectAll('option')
+					.data(cities).enter()
+					.append('option')
+						.text(function (d) { return d; });
+
+
+				jQuery('.cities-list-option2').chosen(
+					{disable_search_threshold: 10}
+				);
+				jQuery('select.cities-list-option2').on('change', function(evt, params) {
+					var city = jQuery(this).val();
+					updateOption2(option2);
+				});
+
+
+
+				//Create average option inputs (col 3, option 2)
+
+				
+				var avgs = inputCol3.append('div')
+										.attr('class','avgs');
+				
+				
+				var avgLabel1 = avgs.append('div')
+										.attr('class','radio')
+										.append('label');
+
+				avgLabel1.append('input')
+							.attr('type', 'radio')
+							.attr('name', 'compareAvg')
+							.attr('value', 'all-cities');
+
+				avgLabel1.append('text').text('All Cities (FiSC and Legacy Cities)');
+
+
+
+				var avgLabel2 = avgs.append('div')
+											.attr('class','radio')
+											.append('label');
+
+				avgLabel2.append('input')
+							.attr('type', 'radio')
+							.attr('name', 'compareAvg')
+							.attr('value', 'fisc');
+
+				avgLabel2.append('text').text('FiSC Cities');
+
+
+
+				var avgLabel3 = avgs.append('div')
+				.attr('class','radio')
+				.append('label');
+
+				avgLabel3.append('input')
+				.attr('type', 'radio')
+				.attr('name', 'compareAvg')
+				.attr('value', 'legacy');
+
+				avgLabel3.append('text').text('Legacy Cities');
+
+
+				// var compareRadio2 = inputCol2
+				// 					.append('label')
+				// 					.insert('input')
+				// 					.attr({"type", "radio"},
+				// 						{"class", "radioInput"},
+				// 						{"name", "compareOptions"
+				// 					})
+				// 					.text('Averages');
+
+
 
 				// Handle select input update
 
 				// d3.select('select').on("change", updateCity);
 
-				function updateCity(city) {
 
-					// var city = this.value;
-
-					cityData = revDataset.filter(
-							function(d){
-								return d.cityName == city;
-							}
-						);
-	
-					years = _.pluck(cityData, 'year');
-
-
-				svg.select('.genRevLine')
-						.datum(revDataset.filter(
-							function(d){
-								return (d.cityName == city && d.revType == "General Revenue")
-							}
-						))
-						.attr("d", revLine)
-
-				svg.call(hover, path1);
-
-				svg.select('.ownSourceRevLine')
-							.datum(revDataset.filter(
-								function(d){
-									return (d.cityName == city && d.revType == "Own Source Revenue")
-								}
-							))
-							.attr("d", revLine)
-
-				svg.call(hover, path2); 
-
-
-				svg.select('.ptRevLine')
-							.datum(revDataset.filter(
-								function(d){
-									return (d.cityName == city && d.revType == "Property Tax Revenue")
-								}
-							))
-							.attr("d", revLine)
-
-				svg.call(hover, path3); 
-
-				return city;
-
-				}
 
 	
 
@@ -433,63 +517,63 @@
 
 				// Average Lines Inputs
 
-				var avgGenRevInput = d3.select('.filters-line-viz-1')
-							.append('div')
-								.attr('class','form-check')
-								.attr('id','avgGenRevInputDiv')
-							.append('input')
-								.attr('type','checkbox')
-								.attr('class','form-check-input')
-								.attr('id','avgGenRevInput')
-								.on('click', function(){
-									// determine if current line is visible
-									var active   = avgAllCitiesGenRev.active ? false : true,
-									newOpacity = active ? 0 : 1;
-									// hide or show the elements
-									d3.select('path#avgAllCitiesGenRev').style('opacity', newOpacity);
-									// update whether or not the elements are active
-									avgAllCitiesGenRev.active = active;
-								});
+				// var avgGenRevInput = inputCol2
+				// 			.append('div')
+				// 				.attr('class','form-check')
+				// 				.attr('id','avgGenRevInputDiv')
+				// 			.append('input')
+				// 				.attr('type','checkbox')
+				// 				.attr('class','form-check-input')
+				// 				.attr('id','avgGenRevInput')
+				// 				.on('click', function(){
+				// 					// determine if current line is visible
+				// 					var active   = avgAllCitiesGenRev.active ? false : true,
+				// 					newOpacity = active ? 0 : 1;
+				// 					// hide or show the elements
+				// 					d3.select('path#avgAllCitiesGenRev').style('opacity', newOpacity);
+				// 					// update whether or not the elements are active
+				// 					avgAllCitiesGenRev.active = active;
+				// 				});
 
-				d3.select('#avgGenRevInputDiv')
-					.append('label')
-						.attr('for','avgGenRevInput')
-						.attr('class','form-check-label')
-						.text('Average General Revenue');
+				// d3.select('#avgGenRevInputDiv')
+				// 	.append('label')
+				// 		.attr('for','avgGenRevInput')
+				// 		.attr('class','form-check-label')
+				// 		.text('Average General Revenue');
 
 
-				var avgOwnSourceInput = d3.select('.filters-line-viz-1')
-							.append('div')
-								.attr('class','form-check')
-								.attr('id','avgOwnSourceInputDiv')
-							.append('input')
-								.attr('type','checkbox')
-								.attr('class','form-check-input')
-								.attr('id','avgOwnSourceInput');
+				// var avgOwnSourceInput = inputCol2
+				// 			.append('div')
+				// 				.attr('class','form-check')
+				// 				.attr('id','avgOwnSourceInputDiv')
+				// 			.append('input')
+				// 				.attr('type','checkbox')
+				// 				.attr('class','form-check-input')
+				// 				.attr('id','avgOwnSourceInput');
 								
 
-				d3.select('#avgOwnSourceInputDiv')
-					.append('label')
-						.attr('for','avgOwnSourceInput')
-						.attr('class','form-check-label')
-						.text('Average Own Source Revenue');
+				// d3.select('#avgOwnSourceInputDiv')
+				// 	.append('label')
+				// 		.attr('for','avgOwnSourceInput')
+				// 		.attr('class','form-check-label')
+				// 		.text('Average Own Source Revenue');
 
 
-				var avgPtInput = d3.select('.filters-line-viz-1')
-						.append('div')
-							.attr('class','form-check')
-							.attr('id','avgPtInputDiv')
-						.append('input')
-							.attr('type','checkbox')
-							.attr('class','form-check-input')
-							.attr('id','avgPtInput');
+				// var avgPtInput = inputCol2
+				// 		.append('div')
+				// 			.attr('class','form-check')
+				// 			.attr('id','avgPtInputDiv')
+				// 		.append('input')
+				// 			.attr('type','checkbox')
+				// 			.attr('class','form-check-input')
+				// 			.attr('id','avgPtInput');
 							
 
-				d3.select('#avgPtInputDiv')
-					.append('label')
-						.attr('for','avgPtInput')
-						.attr('class','form-check-label')
-						.text('Average Property Tax Revenue');
+				// d3.select('#avgPtInputDiv')
+				// 	.append('label')
+				// 		.attr('for','avgPtInput')
+				// 		.attr('class','form-check-label')
+				// 		.text('Average Property Tax Revenue');
 
 
 
@@ -545,11 +629,138 @@
 				 	.call(legendOrdinal);
 
 
-					
-		// swatches({
-		// 		color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
-		// 		})
-				
+
+
+	/* ---------------------------------
+		update functions
+	------------------------------------*/
+
+		function updateCity(city) {
+
+				// var city = this.value;
+
+				cityData = revDataset.filter(
+						function(d){
+							return d.cityName == city;
+						}
+					);
+
+				years = _.pluck(cityData, 'year');
+
+
+			svg.select('.genRevLine')
+					.datum(revDataset.filter(
+						function(d){
+							return (d.cityName == city && d.revType == "General Revenue")
+						}
+					))
+					.attr("d", revLine)
+
+			svg.call(hover, path1);
+
+			svg.select('.ownSourceRevLine')
+						.datum(revDataset.filter(
+							function(d){
+								return (d.cityName == city && d.revType == "Own Source Revenue")
+							}
+						))
+						.attr("d", revLine)
+
+			svg.call(hover, path2); 
+
+
+			svg.select('.ptRevLine')
+						.datum(revDataset.filter(
+							function(d){
+								return (d.cityName == city && d.revType == "Property Tax Revenue")
+							}
+						))
+						.attr("d", revLine)
+
+			svg.call(hover, path3); 
+
+			return city;
+
+			}
+
+
+			function updateOption2(option2) {
+
+				// var city = this.value;
+
+				cityData = revDataset.filter(
+						function(d){
+							return d.cityName == city;
+						}
+					);
+
+				years = _.pluck(cityData, 'year');
+
+
+			svg.select('.genRevLine')
+					.datum(revDataset.filter(
+						function(d){
+							return (d.cityName == city && d.revType == "General Revenue")
+						}
+					))
+					.attr("d", revLine)
+
+			svg.call(hover, path1);
+
+			svg.select('.ownSourceRevLine')
+						.datum(revDataset.filter(
+							function(d){
+								return (d.cityName == city && d.revType == "Own Source Revenue")
+							}
+						))
+						.attr("d", revLine)
+
+			svg.call(hover, path2); 
+
+
+			svg.select('.ptRevLine')
+						.datum(revDataset.filter(
+							function(d){
+								return (d.cityName == city && d.revType == "Property Tax Revenue")
+							}
+						))
+						.attr("d", revLine)
+
+			svg.call(hover, path3); 
+
+			return city;
+
+			}
+
+
+			jQuery(document).ready(function(){
+				jQuery('.avgs').hide();
+				jQuery('.second-city').hide();
+
+				jQuery('input[name="compareOptions"]').click(function(){
+
+
+					var inputValue = jQuery(this).attr("value");
+
+
+					if (inputValue == 'city') {
+						console.log('city is true');
+						jQuery('.second-city').show();
+						jQuery('.avgs').hide();
+					}
+
+					else if (inputValue == 'average') {
+						console.log('avg is true');
+						jQuery('.avgs').show();
+						jQuery('.second-city').hide();
+					}
+
+				});
 			});
+
+
+
+				
+		});
 
 
