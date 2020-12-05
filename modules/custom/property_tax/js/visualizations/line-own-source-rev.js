@@ -517,14 +517,19 @@
 					Legend
 				------------------------------------*/
 
+				var legendSvg = d3.select(".visualization-row")
+									.append("div")
+									.attr("class", "col-md-3")
+									.append("svg");
+
 
 				 var ordinal = d3.scaleOrdinal()
 				 	.domain(["General Revenue", "Own Source Revenue", "Property Tax Revenue"])
-				 	.range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)"]);
+				 	.range([ "#008A77", "rgb(56, 106, 197)", "rgb(222, 119, 46)"]);
 
 				 	svg.append("g")
 				 	.attr("class", "legendOrdinal")
-				 	.attr("transform", "translate(400,5)");
+				 	.attr("transform", "translate(10,5)");
 
 				 	var legendOrdinal = d3.legendColor()
 				 	//d3 symbol creates a path-string, for example
@@ -540,14 +545,10 @@
 				 	.call(legendOrdinal);
 
 
-		var legDiv = d3.selectAll(".line-viz-1")
-						.append("div")
-						.attr("class", "testLegend");
-
 					
-		swatches({
-				color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
-				})
+		// swatches({
+		// 		color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
+		// 		})
 				
 			});
 

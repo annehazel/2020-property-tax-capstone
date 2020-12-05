@@ -50,9 +50,10 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
 
-    <h3>{{ content.field_chart_title }}</h3>  
-    <div class="{{ content.field_visualization_id.0 }} visualization"></div>
-
+    <h4>{{ content.field_chart_title }}</h3>
+    <div class="row visualization-row">
+    <div class="{{ content.field_visualization_id.0 }} visualization col-md-8"></div>
+    </div>
 
 
 <!-- Button trigger modal -->
@@ -74,9 +75,11 @@
       <div class="modal-body">
 
         <div class="container-fluid">
-            <div class="row h-100">
-            <div class="col-md-6 {{ content.field_visualization_id.0 }}"></div>
-            <div class="col-md-4 ml-auto modal-input filters-{{ content.field_visualization_id.0}} hideOnPrint"></div>
+            <div class="row">
+            <div class="col-md-8 {{ content.field_visualization_id.0 }}"></div>
+            </div>
+            <div class="row">
+            <div class="col-md-10 modal-input filters-{{ content.field_visualization_id.0}} hideOnPrint"></div>
             </div>
         </div>
 

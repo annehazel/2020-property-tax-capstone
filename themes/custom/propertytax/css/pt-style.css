@@ -174,10 +174,6 @@ nav.ptc-page-nav-bottom .nextpage {
 /*-----------------------------------------
 Visualizations
 ------------------------------------------*/
-.visualization {
-  padding: 2em 1em;
-}
-
 .showElement {
   visibility: visible;
 }
@@ -202,12 +198,11 @@ Visualizations
 
 .modal-input {
   position: relative;
-  float: right;
   height: 100%;
 }
 
 .chosen-container {
-  width: 100% !important;
+  width: 200px !important;
   margin-bottom: 20px;
 }
 
@@ -252,7 +247,7 @@ Visualizations
 }
 
 .genRevLine {
-  stroke: #996bc3;
+  stroke: #008A77;
 }
 
 .ownSourceRevLine {
@@ -260,7 +255,7 @@ Visualizations
 }
 
 .ptRevLine {
-  stroke: #5dc74c;
+  stroke: #de772e;
 }
 
 .avgAllCities {
