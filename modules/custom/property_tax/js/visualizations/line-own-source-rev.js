@@ -19,8 +19,9 @@
 	var avgDataset =[];
 
 
-	//starting city
+	//starting city and 2nd city
 	var city = "AK: Anchorage";
+	var option2 = "none";
 
 
 
@@ -173,6 +174,7 @@
 									}
 								))
 								.attr("class", "genRevLine")
+								.attr("id", "path1-"+ city.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -187,6 +189,7 @@
 									}
 								))
 								.attr("class", "ownSourceRevLine")
+								.attr("id", "path2-"+ city.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -199,7 +202,8 @@
 										return (d.cityName == city && d.revType == "Property Tax Revenue")
 									}
 								))
-								.attr("class", "ptRevLine")
+								.attr("class", "ptRevLine ")
+								.attr("id", "path3-"+ city.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -207,16 +211,15 @@
 
 
 
-
-				// Create All Cities Average Lines
+				// set up option2 paths
 				var path1a = svg.append("path")
-								.datum(avgDataset.filter(
+								.datum(originalDataset.filter(
 									function(d){
-										return (d.cityName == "Average for All Cities" && d.revType == "General Revenue")
+										return (d.cityName == option2 && d.revType == "General Revenue")
 									}
 								))
 								.attr("class", "genRevLine")
-								.attr("id", "avgAllCitiesGenRev")
+								.attr("id", "path1a-"+ option2.substring(4,))
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
 
@@ -224,41 +227,28 @@
 
 
 				var path2a = svg.append("path")
-								.datum(avgDataset.filter(
+								.datum(originalDataset.filter(
 									function(d){
-										return (d.cityName == "Average for All Cities" && d.revType == "Own Source Revenue")
+										return (d.cityName == option2 && d.revType == "Own Source Revenue")
 									}
 								))
 								.attr("class", "ownSourceRevLine")
+								.attr("id", "path2a-"+ option2.substring(4,))
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
 
 
 
 				var path3a = svg.append("path")
-								.datum(avgDataset.filter(
+								.datum(originalDataset.filter(
 									function(d){
-										return (d.cityName == "Average for All Cities" && d.revType == "Property Tax Revenue")
+										return (d.cityName == option2 && d.revType == "Property Tax Revenue")
 									}
 								))
 								.attr("class", "ptRevLine")
+								.attr("id", "path3a-"+ option2.substring(4,))
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
-
-
-
-
-
-				// var avgFiscCitiesPT = svg.append("path")
-				// 				.datum(avgDataset.filter(
-				// 					function(d){
-				// 						return (d.cityName == "Average for Core FiSCs" && d.revType == "Property Tax Revenue")
-				// 					}
-				// 				))
-				// 				.attr("class", "ptRevLine1")
-				// 				.attr("d", revLine);
-
-				// svg.call(hover, avgFiscCitiesPT); 
 
 
 
@@ -322,7 +312,7 @@
 						});
 
 						dot.attr("transform", `translate(${xScale(s.year)},${yScale(s.amount)})`);
-						dot.select("text").text(s.cityName + " " + s.revType + " " + s.amount);
+						dot.select("text").text(s.cityName + ", " + s.revType + ", $" + s.amount);
 					}
 						
 					function entered() {
@@ -443,7 +433,8 @@
 					{disable_search_threshold: 10}
 				);
 				jQuery('select.cities-list-option2').on('change', function(evt, params) {
-					var city = jQuery(this).val();
+					option2 = jQuery(this).val();
+					console.log(option2);
 					updateOption2(option2);
 				});
 
@@ -463,7 +454,7 @@
 				avgLabel1.append('input')
 							.attr('type', 'radio')
 							.attr('name', 'compareAvg')
-							.attr('value', 'all-cities');
+							.attr('value', 'Average for All Cities');
 
 				avgLabel1.append('text').text('All Cities (FiSC and Legacy Cities)');
 
@@ -476,7 +467,7 @@
 				avgLabel2.append('input')
 							.attr('type', 'radio')
 							.attr('name', 'compareAvg')
-							.attr('value', 'fisc');
+							.attr('value', 'Average for Core FiSCs');
 
 				avgLabel2.append('text').text('FiSC Cities');
 
@@ -489,19 +480,9 @@
 				avgLabel3.append('input')
 				.attr('type', 'radio')
 				.attr('name', 'compareAvg')
-				.attr('value', 'legacy');
+				.attr('value', 'Average for Legacy Cities');
 
 				avgLabel3.append('text').text('Legacy Cities');
-
-
-				// var compareRadio2 = inputCol2
-				// 					.append('label')
-				// 					.insert('input')
-				// 					.attr({"type", "radio"},
-				// 						{"class", "radioInput"},
-				// 						{"name", "compareOptions"
-				// 					})
-				// 					.text('Averages');
 
 
 
@@ -613,7 +594,7 @@
 
 				 	svg.append("g")
 				 	.attr("class", "legendOrdinal")
-				 	.attr("transform", "translate(10,5)");
+				 	.attr("transform", "translate(350,5)");
 
 				 	var legendOrdinal = d3.legendColor()
 				 	//d3 symbol creates a path-string, for example
@@ -639,42 +620,45 @@
 
 				// var city = this.value;
 
-				cityData = revDataset.filter(
-						function(d){
-							return d.cityName == city;
-						}
-					);
+				// cityData = revDataset.filter(
+				// 		function(d){
+				// 			return d.cityName == city;
+				// 		}
+				// 	);
 
-				years = _.pluck(cityData, 'year');
+				// years = _.pluck(cityData, 'year');
 
 
-			svg.select('.genRevLine')
+			svg.select('[id^=path1]')
 					.datum(revDataset.filter(
 						function(d){
 							return (d.cityName == city && d.revType == "General Revenue")
 						}
 					))
+					.attr("id", "path1-"+ city.substring(4,))
 					.attr("d", revLine)
 
 			svg.call(hover, path1);
 
-			svg.select('.ownSourceRevLine')
+			svg.select('[id^=path2]')
 						.datum(revDataset.filter(
 							function(d){
 								return (d.cityName == city && d.revType == "Own Source Revenue")
 							}
 						))
+						.attr("id", "path2-"+ city.substring(4,))
 						.attr("d", revLine)
 
 			svg.call(hover, path2); 
 
 
-			svg.select('.ptRevLine')
+			svg.select('[id^=path3]')
 						.datum(revDataset.filter(
 							function(d){
 								return (d.cityName == city && d.revType == "Property Tax Revenue")
 							}
 						))
+						.attr("id", "path3-"+ city.substring(4,))
 						.attr("d", revLine)
 
 			svg.call(hover, path3); 
@@ -686,49 +670,41 @@
 
 			function updateOption2(option2) {
 
-				// var city = this.value;
 
-				cityData = revDataset.filter(
-						function(d){
-							return d.cityName == city;
-						}
-					);
-
-				years = _.pluck(cityData, 'year');
-
-
-			svg.select('.genRevLine')
-					.datum(revDataset.filter(
-						function(d){
-							return (d.cityName == city && d.revType == "General Revenue")
-						}
-					))
-					.attr("d", revLine)
-
-			svg.call(hover, path1);
-
-			svg.select('.ownSourceRevLine')
-						.datum(revDataset.filter(
-							function(d){
-								return (d.cityName == city && d.revType == "Own Source Revenue")
-							}
-						))
-						.attr("d", revLine)
-
-			svg.call(hover, path2); 
+				svg.select('[id^=path1a]')
+							.datum(originalDataset.filter(
+								function(d){
+									return (d.cityName == option2 && d.revType == "General Revenue")
+								}
+							))
+							.attr("id", "path1a-"+ option2.substring(4,))
+							.attr("d", revLine)
 
 
-			svg.select('.ptRevLine')
-						.datum(revDataset.filter(
-							function(d){
-								return (d.cityName == city && d.revType == "Property Tax Revenue")
-							}
-						))
-						.attr("d", revLine)
 
-			svg.call(hover, path3); 
+				svg.select('[id^=path2a]')
+							.datum(originalDataset.filter(
+								function(d){
+									return (d.cityName == option2 && d.revType == "Own Source Revenue")
+								}
+							))
+							.attr("id", "path2a-"+ option2.substring(4,))
+							.attr("d", revLine)
 
-			return city;
+
+
+				svg.select('[id^=path3a]')
+							.datum(originalDataset.filter(
+								function(d){
+									return (d.cityName == option2 && d.revType == "Property Tax Revenue")
+								}
+							))
+							.attr("id", "path3a-"+ option2.substring(4,))
+							.attr("d", revLine)
+
+
+				return option2;
+
 
 			}
 
@@ -756,6 +732,24 @@
 					}
 
 				});
+
+				jQuery('input[name="compareAvg"]').click(function(){
+
+
+					var inputValue = jQuery(this).attr("value");
+
+					option2 = inputValue;
+					console.log(option2);
+
+					updateOption2(option2);
+
+
+				});
+
+
+
+
+
 			});
 
 
