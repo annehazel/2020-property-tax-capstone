@@ -3,9 +3,11 @@
 
 article.ptc-landing-page div.content {
     margin-top:2em;
-    margin-left: 3%;
-    padding-left: 2em;
-    max-width: 80%;
+    max-width: 100%;
+
+    @media (min-width: 768px) {
+        max-width: 80%;
+    }
 }
 
 

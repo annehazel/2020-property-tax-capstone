@@ -723,12 +723,16 @@
 						console.log('city is true');
 						jQuery('.second-city').show();
 						jQuery('.avgs').hide();
+						option2 = 'none';
+						updateOption2(option2);
 					}
 
 					else if (inputValue == 'average') {
 						console.log('avg is true');
 						jQuery('.avgs').show();
 						jQuery('.second-city').hide();
+						option2 = 'none';
+						updateOption2(option2);
 					}
 
 				});

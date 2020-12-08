@@ -5,11 +5,15 @@ div.region-sidebar-first {
     
    
 
-        background-color: $lincoln-lightblue;
+        background-color: rgba($lincoln-gray,.2);
+        color: $lincoln-gray;
+        font-weight: 500;
+
+        
 
         @media (min-width: 992px) { 
  
-            min-height: 800px;
+            min-height: calc(90vh - 100px);
 
         }
         
@@ -30,6 +34,7 @@ div.region-sidebar-first {
             ul {
                 display: flex;
                 flex-direction: column;
+                position: relative;
             }
             li{
 
@@ -39,12 +44,18 @@ div.region-sidebar-first {
                     position: relative;
                     order: 0;
                     display: block;
-                    &:before {
+                    &:after {
+                        display: block;
+                        position: absolute;
+                        right: 11px;
+                        top: 11px;
+                        content: "";
                         width: 0;
                         height: 0;
-                        border-left: 50px solid transparent;
-                        border-right: 50px solid transparent;
-                        border-top: 100px solid red;
+                        border-top: 8px solid transparent;
+                        border-left: 16px solid #000;
+                        border-bottom: 8px solid transparent;
+                        transition: .2s ease all;
                     }
                 }
 
@@ -59,6 +70,11 @@ div.region-sidebar-first {
                         top: 100%;
                         background-color: #eeeeee;
                         width: 100%;
+                    }
+                    &.active-trail {
+                        &:after {
+                            transform: rotate(90deg);
+                        }
                     }
                     display: block;
                 }

@@ -64,6 +64,17 @@
 }
 
 
+// Mobile
+
+  
+  @media (max-width: 576px) {
+    .hideMobile {
+      visibility:hidden;
+    }
+    
+  }
+
+
 // Modal Print Code
 
 @media screen {

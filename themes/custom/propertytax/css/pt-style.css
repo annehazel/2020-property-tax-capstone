@@ -5,23 +5,29 @@ LAYOUT
   background-color: #48535B;
 }
 
-a.logo.navbar-btn img {
-  width: 25em;
-  padding: 1em;
+img.nav-logo {
+  width: 15em;
+  padding: 1em 0em 1.5em;
 }
 
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 0px;
+  border: 1px solid transparent;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    margin-top: 15px;
+  }
+}
 /* #block-propertytax-account-menu {
      visibility: hidden;
 }*/
-div.region-navigation a.name.navbar-brand {
-  color: white;
-  padding-top: 1.5em;
-  padding-bottom: 2em;
-}
-
 .jumbotron {
-  min-height: 30em;
-  background-color: rbga(#0f9961, 0.5);
+  min-height: 35em;
+  background-color: #ebf9f1;
 }
 .jumbotron h1 {
   font-size: 2em;
@@ -30,15 +36,22 @@ div.region-navigation a.name.navbar-brand {
   font-size: 1.5em;
 }
 
+.bg-dark {
+  background-color: #48535B !important;
+}
+
 h1 {
   color: black;
 }
 
 article.ptc-landing-page div.content {
   margin-top: 2em;
-  margin-left: 3%;
-  padding-left: 2em;
-  max-width: 80%;
+  max-width: 100%;
+}
+@media (min-width: 768px) {
+  article.ptc-landing-page div.content {
+    max-width: 80%;
+  }
 }
 
 article.ptc-book-page div.content h3 {
@@ -54,25 +67,37 @@ article.ptc-book-page div.content h3 {
 Components
 ------------------------------------------*/
 /* PTC Section & Cards */
+.ptc-section-container {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  background-color: #ccd2d6;
+  max-width: 100%;
+}
 @media (min-width: 992px) {
   .ptc-section-container {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    margin-left: 5%;
-    padding-left: 2.2em;
-    background-color: #ccd2d6;
     height: 25em;
-    max-width: 65%;
-    display: flex;
+    max-width: 80%;
+  }
+}
+
+/* Cards Row */
+.ptc-section-container .views-row {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .ptc-section-container .views-row {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 /* Individual cards */
 .ptc-section-container div.views-col {
   margin-top: 1.5em;
-  margin-left: 4em;
   background-color: white;
   padding-top: 1.5em;
+  padding-bottom: 1.5em;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -89,6 +114,17 @@ Components
   font-size: large;
   font-weight: 500;
 }
+@media (max-width: 767px) {
+  .ptc-section-container div.views-col {
+    float: none;
+    width: 65% !important;
+  }
+}
+@media (min-width: 768px) {
+  .ptc-section-container div.views-col {
+    width: 40% !important;
+  }
+}
 @media (min-width: 992px) {
   .ptc-section-container div.views-col {
     min-height: 300px;
@@ -97,11 +133,13 @@ Components
 }
 
 div.region-sidebar-first {
-  background-color: #ccd2d6;
+  background-color: rgba(72, 83, 91, 0.2);
+  color: #48535B;
+  font-weight: 500;
 }
 @media (min-width: 992px) {
   div.region-sidebar-first {
-    min-height: 800px;
+    min-height: calc(90vh - 100px);
   }
 }
 div.region-sidebar-first h2 {
@@ -114,6 +152,7 @@ div.region-sidebar-first a {
 div.region-sidebar-first nav#block-centersections ul {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 div.region-sidebar-first nav#block-centersections li {
   display: none;
@@ -124,12 +163,18 @@ div.region-sidebar-first nav#block-centersections li.active-trail {
   order: 0;
   display: block;
 }
-div.region-sidebar-first nav#block-centersections li.active-trail:before {
+div.region-sidebar-first nav#block-centersections li.active-trail:after {
+  display: block;
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  content: "";
   width: 0;
   height: 0;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 100px solid red;
+  border-top: 8px solid transparent;
+  border-left: 16px solid #000;
+  border-bottom: 8px solid transparent;
+  transition: 0.2s ease all;
 }
 div.region-sidebar-first nav#block-centersections ul.expanded li {
   display: block;
@@ -141,11 +186,15 @@ div.region-sidebar-first nav#block-centersections ul.expanded li:not(.active-tra
   background-color: #eeeeee;
   width: 100%;
 }
+div.region-sidebar-first nav#block-centersections ul.expanded li.active-trail:after {
+  transform: rotate(90deg);
+}
 
 /* main content area*/
 @media (min-width: 992px) {
-  .ptc-book-page div.content {
-    min-height: 600px;
+  .ptc-book-page {
+    min-height: calc(90vh - 100px);
+    padding-bottom: 46px;
   }
 }
 
@@ -216,6 +265,11 @@ Visualizations
   margin-bottom: 3em;
 }
 
+@media (max-width: 576px) {
+  .hideMobile {
+    visibility: hidden;
+  }
+}
 @media screen {
   #printSection {
     display: none;

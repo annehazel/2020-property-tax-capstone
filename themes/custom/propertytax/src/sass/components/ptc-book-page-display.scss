@@ -3,12 +3,13 @@
 
 /* main content area*/
 
-.ptc-book-page div.content {
+.ptc-book-page {
 
 
     @media (min-width: 992px) { 
  
-        min-height: 600px;
+        min-height: calc(90vh - 100px);
+        padding-bottom: 46px;
 
     }
 
