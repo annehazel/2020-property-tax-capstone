@@ -23,6 +23,17 @@ d3-color-legend:
     ../../../node_modules/d3-color-legend/dist/d3-color-legend.min.js: {}
 
 
+bootstrap-slider:
+  version: 11.0.2
+  js:
+    ../../../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js: {}
+  css:
+    theme:
+      ../../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.once
+
 ptc:
   version: 1
   js:

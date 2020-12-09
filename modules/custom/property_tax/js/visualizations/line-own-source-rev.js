@@ -363,6 +363,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				inputCol3.append("h5").text('Select an option:');
 
+
 				//Create main city select input (col 1)
 
 				var mainSelect = inputCol1.append('select')
@@ -384,6 +385,39 @@ if (jQuery('.line-viz-1').length ) {
 					updateCity(city);
 				});
 
+				var xSlider = inputCol1.append('div')
+										.attr('class','slidecontainer')
+										.append('label')
+										.text('Adjust Y Axis Values')
+										.append('input')
+										.attr('type', 'range')
+										.attr('min', 0)
+										.attr('max', d3.max(revDataset, function(d) {
+															return d.amount;
+													})
+										);
+
+				var xSlider2 = inputCol1.append('input')
+										.attr('type', 'text')
+										.attr("id", "xSlider")
+										.attr('data-slider-min', 0)
+										.attr('data-slider-max', d3.max(revDataset, function(d) {
+																	return d.amount;
+																})
+										)
+										.attr('data-slider-value', d3.max(revDataset, function(d) {
+																	return d.amount;
+																})
+										)
+										.attr('data-slider-step', 10);
+
+				//var slider = new Slider('#ex2', {});
+
+				jQuery('#xSlider').slider({
+					formatter: function(value) {
+						return 'Current value: ' + value;
+					}
+				});
 
 
 				//Create compare option input (col 2)
@@ -434,7 +468,6 @@ if (jQuery('.line-viz-1').length ) {
 				);
 				jQuery('select.cities-list-option2').on('change', function(evt, params) {
 					option2 = jQuery(this).val();
-					console.log(option2);
 					updateOption2(option2);
 				});
 
@@ -574,90 +607,95 @@ if (jQuery('.line-viz-1').length ) {
 
 			return city;
 
-			}
+		} // End updateCity
 
 
-			function updateOption2(option2) {
+		function updateOption2(option2) {
 
 
-				svg.select('[id^=path1a]')
-							.datum(originalDataset.filter(
-								function(d){
-									return (d.cityName == option2 && d.revType == "General Revenue")
-								}
-							))
-							.attr("id", "path1a-"+ option2.substring(4,))
-							.attr("d", revLine)
-
-
-
-				svg.select('[id^=path2a]')
-							.datum(originalDataset.filter(
-								function(d){
-									return (d.cityName == option2 && d.revType == "Own Source Revenue")
-								}
-							))
-							.attr("id", "path2a-"+ option2.substring(4,))
-							.attr("d", revLine)
+			svg.select('[id^=path1a]')
+						.datum(originalDataset.filter(
+							function(d){
+								return (d.cityName == option2 && d.revType == "General Revenue")
+							}
+						))
+						.attr("id", "path1a-"+ option2.substring(4,))
+						.attr("d", revLine)
 
 
 
-				svg.select('[id^=path3a]')
-							.datum(originalDataset.filter(
-								function(d){
-									return (d.cityName == option2 && d.revType == "Property Tax Revenue")
-								}
-							))
-							.attr("id", "path3a-"+ option2.substring(4,))
-							.attr("d", revLine)
+			svg.select('[id^=path2a]')
+						.datum(originalDataset.filter(
+							function(d){
+								return (d.cityName == option2 && d.revType == "Own Source Revenue")
+							}
+						))
+						.attr("id", "path2a-"+ option2.substring(4,))
+						.attr("d", revLine)
 
 
-				return option2;
+
+			svg.select('[id^=path3a]')
+						.datum(originalDataset.filter(
+							function(d){
+								return (d.cityName == option2 && d.revType == "Property Tax Revenue")
+							}
+						))
+						.attr("id", "path3a-"+ option2.substring(4,))
+						.attr("d", revLine)
 
 
-			}
+			return option2;
 
 
-			jQuery(document).ready(function(){
-				jQuery('.avgs').hide();
-				jQuery('.second-city').hide();
-
-				jQuery('input[name="compareOptions"]').click(function(){
+		} // End updateOption2
 
 
-					var inputValue = jQuery(this).attr("value");
+		// Input 'on change
+		jQuery(document).ready(function(){
+			jQuery('.avgs').hide();
+			jQuery('.second-city').hide();
+
+			jQuery('input[name="compareOptions"]').click(function(){
 
 
-					if (inputValue == 'city') {
-						console.log('city is true');
-						jQuery('.second-city').show();
-						jQuery('.avgs').hide();
-						option2 = 'none';
-						updateOption2(option2);
-					}
-
-					else if (inputValue == 'average') {
-						console.log('avg is true');
-						jQuery('.avgs').show();
-						jQuery('.second-city').hide();
-						option2 = 'none';
-						updateOption2(option2);
-					}
-
-				});
-
-				jQuery('input[name="compareAvg"]').click(function(){
+				var inputValue = jQuery(this).attr("value");
 
 
-					var inputValue = jQuery(this).attr("value");
-
-					option2 = inputValue;
-					console.log(option2);
-
+				if (inputValue == 'city') {
+					console.log('city is true');
+					jQuery('.second-city').show();
+					jQuery('.avgs').hide();
+					option2 = 'none';
 					updateOption2(option2);
+				}
+
+				else if (inputValue == 'average') {
+					console.log('avg is true');
+					jQuery('.avgs').show();
+					jQuery('.second-city').hide();
+					option2 = 'none';
+					updateOption2(option2);
+				}
+
+			});
+
+			jQuery('input[name="compareAvg"]').click(function(){
 
 
-				});
+				var inputValue = jQuery(this).attr("value");
+
+				option2 = inputValue;
+				console.log(option2);
+
+				updateOption2(option2);
+
+
+			});
+
+
+		
+
 
 
 
