@@ -1,4 +1,5 @@
 
+if (jQuery('.map-viz-1').length) {
 
 			//Width and height
 			var w = 500;
@@ -21,7 +22,7 @@
 								//https://github.com/d3/d3-scale-chromatic
 
 			//Create SVG element
-			var svgChoropleth = d3.selectAll(".line-viz-2")
+			var svgChoropleth = d3.selectAll(".map-viz-1")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -213,3 +214,4 @@
 		}
 
 			});
+		}

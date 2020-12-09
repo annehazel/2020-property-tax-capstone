@@ -1,5 +1,5 @@
 
-
+if (jQuery('.rev-heatmap').length) {
 
 
 
@@ -188,3 +188,4 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
     })
 
+  }
