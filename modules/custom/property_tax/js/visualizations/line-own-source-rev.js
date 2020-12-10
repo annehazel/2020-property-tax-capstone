@@ -1,11 +1,15 @@
 
+
+//import * from "/modules/custom/property_tax/js/vendor/observable-legends.js"
+
+
 if (jQuery('.line-viz-1').length ) {
 	/* ---------------------------------
 		Initial Setup
 	------------------------------------*/
 	//import {legend} from '../../../../../node_modules/d3-color-legend/dist/d3-color-legend.js';
 	//import * as legend from "/modules/custom/property_tax/js/vendor/d3-legend.min.js"
-	//import *  from "/modules/custom/property_tax/js/vendor/observable-legends.js"
+
 
 	// Set width and height for SVG area
 	var w = 500;
@@ -534,9 +538,9 @@ if (jQuery('.line-viz-1').length ) {
 				 	.domain(["General Revenue", "Own Source Revenue", "Property Tax Revenue"])
 				 	.range([ "#008A77", "rgb(56, 106, 197)", "rgb(222, 119, 46)"]);
 
-				 	svg.append("g")
+				 	legendSvg.append("g")
 				 	.attr("class", "legendOrdinal")
-				 	.attr("transform", "translate(350,5)");
+				 	.attr("transform", "translate(20,5)");
 
 				 	var legendOrdinal = d3.legendColor()
 				 	//d3 symbol creates a path-string, for example
@@ -548,9 +552,13 @@ if (jQuery('.line-viz-1').length ) {
 				 	.cellFilter(function(d){ return d.label !== "e" })
 				 	.scale(ordinal);
 
-				 	svg.select(".legendOrdinal")
+				 	legendSvg.select(".legendOrdinal")
 				 	.call(legendOrdinal);
 
+
+		swatches({
+		color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
+		})
 
 
 

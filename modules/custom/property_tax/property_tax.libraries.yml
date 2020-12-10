@@ -3,7 +3,7 @@ d3:
   js:
     js/vendor/d3.min.js: {}
     js/vendor/d3-legend.min.js: {}
-    # js/vendor/d3-legend-obs.js: {attributes: { type: "module"}}
+    js/vendor/observable-legends.js: {}
 
 chosen:
   version: v1.8.7

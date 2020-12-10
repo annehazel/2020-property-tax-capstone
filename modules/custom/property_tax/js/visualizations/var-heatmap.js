@@ -80,11 +80,12 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
     varDatasetRHP = revDatasetRHP.filter(
       function(d){
-        return (d.region == currentRegion && 
+        return ( 
         d.revType == currentRev);
       }
     );
 
+    //d.region == currentRegion &&
 
 
   // Get list of unique cities in dataset
@@ -138,7 +139,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
        ]);
 
       svg.append("g")
-        .attr("transform", "translate(0," + (height+3) + ")")
+        .attr("transform", "translate(8," + (height+3) + ")")
         .call(d3.axisBottom(x))
 
 

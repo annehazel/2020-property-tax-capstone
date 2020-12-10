@@ -2,8 +2,6 @@
 
 
 
-
-
 function legend({
     color,
     title,
@@ -148,7 +146,7 @@ function legend({
     swatchHeight = swatchSize,
     marginLeft = 0
   }) {
-    const id = DOM.uid().id;
+    const id = 27;
   
     if (columns !== null) return html`<div style="display: flex; align-items: center; margin-left: ${+marginLeft}px; min-height: 33px; font: 10px sans-serif;">
     <style>
