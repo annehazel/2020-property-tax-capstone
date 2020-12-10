@@ -528,7 +528,7 @@ if (jQuery('.line-viz-1').length ) {
 					Legend
 				------------------------------------*/
 
-				var legendSvg = d3.select(".visualization-row")
+				var legendSvg = d3.selectAll(".visualization-row")
 									.append("div")
 									.attr("class", "col-md-3")
 									.append("svg");
