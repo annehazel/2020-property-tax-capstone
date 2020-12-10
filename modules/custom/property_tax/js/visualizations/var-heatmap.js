@@ -1,23 +1,13 @@
-
-if (jQuery('.rev-heatmap').length) {
+if (jQuery('.var-heatmap').length) {
 
 
 
 var originalDatasetRHP =[];
 var revDatasetRHP =[];
+var regionNE = ['MA', 'CT', 'ME', 'NH', 'RI', 'VT'];
+var regionPAC = ['AK', 'CA', 'HI', 'OR', 'WA'];
 
-
-var margin = {top: 30, right: 30, bottom: 30, left: 100},
-  width = 800 - margin.left - margin.right,
-  height = 200 - margin.top - margin.bottom;
-
-
-var svg = d3.select(".rev-heatmap")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+var margin = {top: 30, right: 30, bottom: 30, left: 100};
 
 // Function to convert Dates to strings
 var formatTime = d3.timeFormat("%Y");
@@ -55,6 +45,19 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 	}).then(function(dataset) {
 
 
+    for (i = 0; i < originalDatasetRHP.length; i++) {
+      
+      if (regionNE.includes(originalDatasetRHP[i].state)){
+        originalDatasetRHP[i].region = 'New England';
+
+      }
+      else if (regionPAC.includes(originalDatasetRHP[i].state)){
+        originalDatasetRHP[i].region = 'Pacific';
+
+      }
+
+    }
+
     var avgDatasetRHP = originalDatasetRHP.filter(
       function(d){
         return (d.cityName == "Average for All Cities" || 
@@ -72,11 +75,12 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
     );
 
     var currentState = "MA";
+    var currentRegion = "New England";
     var currentRev = "Property Tax Revenue";
 
     varDatasetRHP = revDatasetRHP.filter(
       function(d){
-        return (d.state == currentState && 
+        return (d.region == currentRegion && 
         d.revType == currentRev);
       }
     );
@@ -111,6 +115,19 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
 
 
+
+  var width = 800 - margin.left - margin.right;
+  var height = cities.length * 15;
+
+
+  var svg = d3.selectAll(".var-heatmap")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+
   // Build X scales and axis:
 
       var x = d3.scaleTime()
@@ -121,8 +138,9 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
        ]);
 
       svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + (height+3) + ")")
         .call(d3.axisBottom(x))
+
 
       // Build X scales and axis:
       var y = d3.scaleBand()
@@ -140,7 +158,9 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
            d3.max(varDatasetRHP, function(d) { return d.amount; })
          ])
 
-         console.log(varDatasetRHP.length);
+
+
+         var sqWidth = (width/years.length) - 1.5;
 
         // Create the squares
         svg.selectAll()
@@ -149,8 +169,8 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
           .append("rect")
           .attr("x", function(d) { return x(d.year);})
           .attr("y", function(d) { return y(d.cityName) })
-          .attr("width", "5")
-          .attr("height", y.bandwidth)
+          .attr("width", sqWidth)
+          .attr("height", "18")
           .style("fill", function(d) { return myColor(d.amount)} )
 
 

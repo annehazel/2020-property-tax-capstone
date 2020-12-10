@@ -38,7 +38,8 @@ ptc:
   version: 1
   js:
     js/visualizations/line-own-source-rev.js: {}
-    js/visualizations/rev-heatmap.js: {}
+    js/visualizations/var-heatmap.js: {}
+    js/visualizations/pt-choropleth.js: {}
     js/custom/ptc-menus-inputs.js: {}
     js/custom/ptc-viz-inputs.js: {}
   dependencies:

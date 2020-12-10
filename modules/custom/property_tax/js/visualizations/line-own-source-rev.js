@@ -158,7 +158,7 @@ if (jQuery('.line-viz-1').length ) {
 					.attr("transform", "translate(0," + (h - padding) + ")")
 					.call(xAxis);
 
-				svg.append("g")
+				var yAxisSVG = svg.append("g")
 					.attr("class", "axis")
 					.attr("transform", "translate(" + padding + ",0)")
 					.call(yAxis);
@@ -385,21 +385,21 @@ if (jQuery('.line-viz-1').length ) {
 					updateCity(city);
 				});
 
-				var xSlider = inputCol1.append('div')
-										.attr('class','slidecontainer')
-										.append('label')
-										.text('Adjust Y Axis Values')
-										.append('input')
-										.attr('type', 'range')
-										.attr('min', 0)
-										.attr('max', d3.max(revDataset, function(d) {
-															return d.amount;
-													})
-										);
+				// var xSlider = inputCol1.append('div')
+				// 						.attr('class','slidecontainer')
+				// 						.append('label')
+				// 						.text('Adjust Y Axis Values')
+				// 						.append('input')
+				// 						.attr('type', 'range')
+				// 						.attr('min', 0)
+				// 						.attr('max', d3.max(revDataset, function(d) {
+				// 											return d.amount;
+				// 									})
+				// 						);
 
-				var xSlider2 = inputCol1.append('input')
+				var ySlider2 = inputCol1.append('input')
 										.attr('type', 'text')
-										.attr("id", "xSlider")
+										.attr("id", "ySlider")
 										.attr('data-slider-min', 0)
 										.attr('data-slider-max', d3.max(revDataset, function(d) {
 																	return d.amount;
@@ -411,13 +411,13 @@ if (jQuery('.line-viz-1').length ) {
 										)
 										.attr('data-slider-step', 10);
 
-				//var slider = new Slider('#ex2', {});
 
-				jQuery('#xSlider').slider({
-					formatter: function(value) {
-						return 'Current value: ' + value;
-					}
-				});
+				var ySlider = jQuery('#ySlider').slider();
+
+				jQuery('#ySlider').on('change', function(evt, params) {
+								var yMax = jQuery(this).val();
+								updateYScale(yMax);
+							});
 
 
 				//Create compare option input (col 2)
@@ -651,6 +651,39 @@ if (jQuery('.line-viz-1').length ) {
 		} // End updateOption2
 
 
+		function updateYScale(yMax) {
+
+			yScale = d3.scaleLinear()
+				.domain([
+					d3.min(revDataset, function(d) {
+						if (d.amount >= 0)
+						return d.amount;
+					}) - 10,
+					yMax
+				])
+				.range([h - padding, 0]);
+
+			yAxis = d3.axisLeft()
+				.scale(yScale)
+				.ticks(8);
+
+			yAxisSVG.call(yAxis);
+
+			revLine = d3.line()
+				.x(function(d) { 
+					return xScale(d.year); 
+				})
+				.y(function(d) {
+					return yScale(d.amount); 
+				});
+
+			updateCity(city);
+			updateOption2(option2);
+
+		} // End updateYScale
+
+
+
 		// Input 'on change
 		jQuery(document).ready(function(){
 			jQuery('.avgs').hide();
@@ -663,7 +696,7 @@ if (jQuery('.line-viz-1').length ) {
 
 
 				if (inputValue == 'city') {
-					console.log('city is true');
+
 					jQuery('.second-city').show();
 					jQuery('.avgs').hide();
 					option2 = 'none';
@@ -671,7 +704,6 @@ if (jQuery('.line-viz-1').length ) {
 				}
 
 				else if (inputValue == 'average') {
-					console.log('avg is true');
 					jQuery('.avgs').show();
 					jQuery('.second-city').hide();
 					option2 = 'none';
@@ -686,7 +718,6 @@ if (jQuery('.line-viz-1').length ) {
 				var inputValue = jQuery(this).attr("value");
 
 				option2 = inputValue;
-				console.log(option2);
 
 				updateOption2(option2);
 
