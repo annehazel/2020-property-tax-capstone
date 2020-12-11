@@ -23,14 +23,45 @@ img.nav-logo {
   }
 }
 .jumbotron {
-  min-height: 35em;
+  display: flex;
   background-color: #ebf9f1;
+}
+.jumbotron .container,
+.jumbotron .row-flex,
+.jumbotron .col-flex {
+  display: flex;
+}
+.jumbotron .container {
+  max-width: 100%;
 }
 .jumbotron h1 {
   font-size: 2em;
 }
+.jumbotron img {
+  width: 100%;
+  height: auto;
+}
 .jumbotron .lead {
   font-size: 1.5em;
+}
+.jumbotron .row-flex {
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .jumbotron .row-flex {
+    flex-direction: row;
+  }
+}
+.jumbotron .col-flex {
+  flex-direction: column;
+}
+.jumbotron .col-flex:last-child {
+  justify-content: flex-end;
+}
+@media (min-width: 768px) {
+  .jumbotron .col-flex:first-child {
+    order: 2;
+  }
 }
 
 .bg-dark {
@@ -146,12 +177,16 @@ div.region-sidebar-first h2 {
 div.region-sidebar-first a {
   color: black;
 }
+div.region-sidebar-first .nav > li > a:hover {
+  background-color: #92C82A;
+}
 div.region-sidebar-first nav#block-centersections ul {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 div.region-sidebar-first nav#block-centersections li {
+  background-color: #48535B;
   display: none;
   order: 1;
 }
@@ -180,7 +215,6 @@ div.region-sidebar-first nav#block-centersections ul.expanded li:not(.active-tra
   position: absolute;
   z-index: 10;
   top: 100%;
-  background-color: #eeeeee;
   width: 100%;
 }
 div.region-sidebar-first nav#block-centersections ul.expanded li.active-trail:after {

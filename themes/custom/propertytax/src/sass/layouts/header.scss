@@ -26,17 +26,56 @@ img.nav-logo {
 
 
 .jumbotron {
-
-    min-height: 35em;
+    display: flex;
+    // min-height: 35em;
     background-color: $fs-green;
+
+    .container,
+    .row-flex,
+    .col-flex {
+        display: flex;
+    }
+
+    .container {
+        max-width: 100%;
+    }
 
     h1{
     font-size: 2em;
+    }
+    img {
+        width: 100%;
+        height: auto;
     }
 
     .lead {
         font-size: 1.5em;
     }
+
+    .row-flex {
+        flex-direction: column;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
+    }
+
+    .col-flex {
+        flex-direction: column;
+
+        &:last-child {
+            justify-content: flex-end;
+        }
+
+        &:first-child {
+            @media (min-width: 768px) {
+                order: 2;
+            }
+        }
+    }
+    
+
+
 
 }
 

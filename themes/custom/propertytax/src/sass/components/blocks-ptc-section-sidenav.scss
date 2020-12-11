@@ -29,6 +29,20 @@ div.region-sidebar-first {
 
         }
 
+        .nav > li > a {
+
+            &:hover {
+
+                background-color: $lincoln-green;
+            }
+
+
+        }
+
+        ul.menu--center-sections {
+
+            
+        }
 
         nav#block-centersections {
             ul {
@@ -37,7 +51,7 @@ div.region-sidebar-first {
                 position: relative;
             }
             li{
-
+                background-color: $lincoln-gray;
                 display: none; 
                 order: 1;
                 &.active-trail {
@@ -68,7 +82,6 @@ div.region-sidebar-first {
                         position: absolute;
                         z-index: 10;
                         top: 100%;
-                        background-color: #eeeeee;
                         width: 100%;
                     }
                     &.active-trail {
