@@ -14,7 +14,8 @@ if (jQuery('.line-viz-1').length ) {
 	// Set width and height for SVG area
 	var w = 500;
 	var h = 300;
-	var padding = 40;
+	var margin = {top: 30, right: 30, bottom: 15, left: 70};
+
 
 	// Setup variables
 	var dataset, xScale, yScale, xAxis, yAxis, revLine;
@@ -103,7 +104,7 @@ if (jQuery('.line-viz-1').length ) {
 								d3.min(revDataset, function(d) { return d.year; }),
 								d3.max(revDataset, function(d) { return d.year; })
 							])
-							.range([padding, w]);
+							.range([margin.left, w]);
 
 				yScale = d3.scaleLinear()
 							.domain([
@@ -115,7 +116,7 @@ if (jQuery('.line-viz-1').length ) {
 									return d.amount;
 								})
 							])
-							.range([h - padding, 0]);
+							.range([h, 0]);
 
 
 				//Define X axis
@@ -157,19 +158,35 @@ if (jQuery('.line-viz-1').length ) {
 
 				var svg = d3.selectAll(".line-viz-1")
 							.append("svg")
-							.attr("width", w)
-							.attr("height", h);
+								.attr("width", w + margin.left + margin.right)
+								.attr("height", h + margin.top + margin.bottom);
+
 
 				// Draw axes
 				svg.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(0," + (h - padding) + ")")
+					.attr("transform", "translate(0," + h + ")")
 					.call(xAxis);
+
+				svg.append("text")
+					.attr("class", "xlabel")
+					.attr("text-anchor", "middle")
+					.attr("x", w/2)
+					.attr("y", h + 40)
+					.text("Year (1977 - 2017)");
 
 				var yAxisSVG = svg.append("g")
 					.attr("class", "axis")
-					.attr("transform", "translate(" + padding + ",0)")
+					.attr("transform", "translate(" + margin.left + ",0)")
 					.call(yAxis);
+
+				svg.append("text")
+					.attr("class", "y-label")
+					.attr("text-anchor", "end")
+					.attr("y", 0)
+					.attr("dy", ".75em")
+					.attr("transform", "rotate(-90)")
+					.text("Real per capita dollars ($2017)");
 
 
 
@@ -669,7 +686,7 @@ if (jQuery('.line-viz-1').length ) {
 					}) - 10,
 					yMax
 				])
-				.range([h - padding, 0]);
+				.range([h, 0]);
 
 			yAxis = d3.axisLeft()
 				.scale(yScale)
