@@ -276,6 +276,10 @@ Visualizations
   width: 100%;
 }
 
+.ptc-spinner {
+  padding: 6em;
+}
+
 .modal-dialog {
   margin-left: 10%;
 }

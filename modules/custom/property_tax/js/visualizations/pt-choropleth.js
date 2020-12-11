@@ -22,6 +22,7 @@ if (jQuery('.map-viz-1').length) {
 								//https://github.com/d3/d3-scale-chromatic
 
 			//Create SVG element
+			d3.selectAll('.ptc-spinner').remove();
 			var svgChoropleth = d3.selectAll(".map-viz-1")
 						.append("svg")
 						.attr("width", w)

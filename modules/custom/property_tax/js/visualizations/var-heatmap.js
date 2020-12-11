@@ -120,6 +120,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
   var width = 800 - margin.left - margin.right;
   var height = cities.length * 15;
 
+  d3.selectAll('.ptc-spinner').remove();
 
   var svg = d3.selectAll(".var-heatmap")
       .append("svg")
