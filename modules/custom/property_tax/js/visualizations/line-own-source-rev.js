@@ -560,10 +560,6 @@ if (jQuery('.line-viz-1').length ) {
 				 	.call(legendOrdinal);
 
 
-		swatches({
-		color: d3.scaleOrdinal(["blueberries", "oranges", "apples"], d3.schemeCategory10)
-		})
-
 
 
 	/* ---------------------------------
