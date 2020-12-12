@@ -44,3 +44,30 @@ nav.ptc-page-nav-bottom {
 
 
 }
+
+
+.ptc-row-flex,
+.ptc-col-flex {
+    display: flex;
+}
+
+
+.ptc-row-flex {
+    flex-direction: column;
+    margin-right: 0;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.ptc-col-flex {
+    flex-direction: column;
+
+    &:last-child {
+  
+        width:100%;
+
+    }
+
+}

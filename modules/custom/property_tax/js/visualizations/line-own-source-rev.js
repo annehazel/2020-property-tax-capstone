@@ -153,7 +153,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				// Create SVG element
 				// d3.remove('.ptc-spinner img');
-				 d3.selectAll('.ptc-spinner').remove();
+				d3.selectAll('.ptc-spinner').remove();
 
 				var svg = d3.selectAll(".line-viz-1")
 						.append('h5')
