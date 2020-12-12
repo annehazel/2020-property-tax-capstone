@@ -58,6 +58,12 @@ img.nav-logo {
 .jumbotron .col-flex:last-child {
   justify-content: flex-end;
 }
+@media (min-width: 998px) {
+  .jumbotron .col-flex:last-child {
+    padding-right: 8em;
+    padding-bottom: 4em;
+  }
+}
 @media (min-width: 768px) {
   .jumbotron .col-flex:first-child {
     order: 2;

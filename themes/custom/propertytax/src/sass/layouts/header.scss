@@ -65,6 +65,10 @@ img.nav-logo {
 
         &:last-child {
             justify-content: flex-end;
+            @media (min-width: 998px) {
+                padding-right: 8em;
+                padding-bottom: 4em;
+            }
         }
 
         &:first-child {
