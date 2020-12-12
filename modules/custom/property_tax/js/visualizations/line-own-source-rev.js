@@ -155,6 +155,9 @@ if (jQuery('.line-viz-1').length ) {
 				// d3.remove('.ptc-spinner img');
 				 d3.selectAll('.ptc-spinner').remove();
 
+				var svg = d3.selectAll(".line-viz-1")
+						.append('h5')
+						.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
 
 				var svg = d3.selectAll(".line-viz-1")
 							.append("svg")
@@ -410,17 +413,6 @@ if (jQuery('.line-viz-1').length ) {
 					updateCity(city);
 				});
 
-				// var xSlider = inputCol1.append('div')
-				// 						.attr('class','slidecontainer')
-				// 						.append('label')
-				// 						.text('Adjust Y Axis Values')
-				// 						.append('input')
-				// 						.attr('type', 'range')
-				// 						.attr('min', 0)
-				// 						.attr('max', d3.max(revDataset, function(d) {
-				// 											return d.amount;
-				// 									})
-				// 						);
 
 				var ySlider2 = inputCol1.append('input')
 										.attr('type', 'text')
@@ -551,7 +543,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				var legendSvg = d3.selectAll(".visualization-row")
 									.append("div")
-									.attr("class", "col-md-3")
+									.attr("class", "col-md-3 line-viz-1-legendSVG")
 									.append("svg");
 
 
@@ -561,7 +553,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				 	legendSvg.append("g")
 				 	.attr("class", "legendOrdinal")
-				 	.attr("transform", "translate(20,5)");
+				 	.attr("transform", "translate(10,5)");
 
 				 	var legendOrdinal = d3.legendColor()
 				 	//d3 symbol creates a path-string, for example
