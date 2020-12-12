@@ -39,7 +39,6 @@ if (jQuery('.map-viz-1').length) {
 				};
 
 			}).then(function(data){
-				//console.log(data);
 
 				//Set input domain for color scale
 				color.domain([
@@ -81,7 +80,7 @@ if (jQuery('.map-viz-1').length) {
 					}
 
 
-					//console.log(json);
+				
 					//Bind data and create one path per GeoJSON feature
 					svgChoropleth.selectAll("path")
 					   .data(json.features)

@@ -136,7 +136,20 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
   d3.selectAll('.ptc-spinner').remove();
 
-  var svg = d3.selectAll(".var-heatmap")
+  // build tooltip
+  var tooltip = d3.selectAll('.var-heatmap')
+  .append("div")
+  .attr("class", "varheatmap1-tooltip varheatmap1-hidden");
+
+  tooltip.append("p")
+    .attr("class", "varheatmap1-tooltip-heading");
+
+  tooltip.append("p")
+    .append("span")
+    .attr("class", "varheatmap1-value");
+
+
+  d3.selectAll(".var-heatmap")
                 .append('h5')
                 .text("Showing: " + currentVar + " for " + placeSelection);
 
@@ -144,8 +157,10 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
       .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-      .append("g")
+        .append("g")
         .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+
 
 
   // Build X scales and axis:
@@ -191,8 +206,30 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
           .attr("y", function(d) { return y(d.cityName) })
           .attr("width", sqWidth)
           .attr("height", "18")
-          .style("fill", function(d) { return myColor(d.amount)} )
+          .style("fill", function(d) { return myColor(d.amount)})
+          // setup tooltip
+          .on("mouseover", function(d, i) {
+            var xPos = parseFloat(d3.select(this).attr("x"));
+            var yPos = parseFloat(d3.select(this).attr("y"))
+            //Update the tooltip position and value
+            d3.selectAll(".varheatmap1-tooltip")
+            .style("left", xPos + "px")
+            .style("top", yPos + "px")
+            .selectAll(".varheatmap1-tooltip-heading")
+            .text(i.cityName + " ("+ formatTime(i.year) + ")");
 
+            d3.selectAll(".varheatmap1-value")
+            .text("$" + i.amount);
+            
+            //Show the tooltip
+            d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", false);
+          })
+          .on("mouseout", function() {
+
+					  //Hide the tooltip
+					  d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", true);
+
+			   });
 
 
 
@@ -316,7 +353,6 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
 
 				jQuery('input.color').on('blur', function(evt, params) {
-          console.log(jQuery(this).val());
 					color = jQuery(this).val();
 					updateColor(color);
 				});
