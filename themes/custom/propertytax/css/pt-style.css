@@ -102,9 +102,10 @@ Components
 ------------------------------------------*/
 /* PTC Section & Cards */
 .ptc-section-container {
+  color: white;
+  font-size: medium;
   margin-top: 2em;
   margin-bottom: 2em;
-  background-color: #ccd2d6;
   max-width: 100%;
 }
 @media (min-width: 992px) {
@@ -129,7 +130,7 @@ Components
 /* Individual cards */
 .ptc-section-container div.views-col {
   margin-top: 1.5em;
-  background-color: white;
+  background-color: rgba(72, 83, 91, 0.8);
   padding-top: 1.5em;
   padding-bottom: 1.5em;
   text-align: center;
@@ -144,9 +145,8 @@ Components
   margin-right: auto;
 }
 .ptc-section-container div.views-col a {
-  color: #0F7496;
-  font-size: large;
-  font-weight: 500;
+  color: white;
+  font-size: x-large;
 }
 @media (max-width: 767px) {
   .ptc-section-container div.views-col {

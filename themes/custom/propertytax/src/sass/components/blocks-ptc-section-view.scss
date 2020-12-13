@@ -4,21 +4,16 @@
 
 
 .ptc-section-container {
+    color: white;
+    font-size: medium;
+    margin-top:2em;
+    margin-bottom: 2em;
+    max-width: 100%;
 
-
- 
-        margin-top:2em;
-        margin-bottom: 2em;
-
-        background-color: $lincoln-lightblue;
-        max-width: 100%;
-
-        @media (min-width: 992px) {
-            height: 25em;
-            max-width: 80%;
-        }
-
-
+    @media (min-width: 992px) {
+        height: 25em;
+        max-width: 80%;
+    }
 }
 
 /* Cards Row */
@@ -34,10 +29,9 @@
 
 /* Individual cards */
 .ptc-section-container div.views-col {
-   //margin-right: 2.5em;
+
     margin-top: 1.5em;
-    background-color: white;
-    //padding: 1em;
+    background-color: rgba($lincoln-gray, .8);
     padding-top: 1.5em;
     padding-bottom: 1.5em;
     text-align: center;
@@ -55,9 +49,8 @@
     }
 
     a {
-        color: $lincoln-blue;
-        font-size: large;
-        font-weight: 500;
+        color: white;
+        font-size: x-large;
     }
     @media (max-width: 767px) {
         float: none;
