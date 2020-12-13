@@ -25,7 +25,7 @@ if (jQuery('.line-viz-1').length ) {
 
 
 	//starting city and 2nd city
-	var city = "AK: Anchorage";
+	var currentCity = "AK: Anchorage";
 	var option2 = "none";
 
 
@@ -157,7 +157,19 @@ if (jQuery('.line-viz-1').length ) {
 
 				var svg = d3.selectAll(".line-viz-1")
 						.append('h5')
-						.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
+						.attr("class", "dynamic-title")
+						.text("Showing: " + currentCity.substring(3,) + ", " + currentCity.substring(0, 2));
+
+
+			if (option2 != "none"){
+
+				d3.selectAll(".line-viz-1")
+						.append('h5')
+						.text("Showing: " + currentCity.substring(3,) + ", " 
+						+ currentCity.substring(0, 2) 
+						+ " compared to " + option2);
+
+			  }
 
 				var svg = d3.selectAll(".line-viz-1")
 							.append("svg")
@@ -198,11 +210,11 @@ if (jQuery('.line-viz-1').length ) {
 				var path1 = svg.append("path")
 								.datum(revDataset.filter(
 									function(d){
-										return (d.cityName == city && d.revType == "General Revenue")
+										return (d.cityName == currentCity && d.revType == "General Revenue")
 									}
 								))
 								.attr("class", "genRevLine")
-								.attr("id", "path1-"+ city.substring(4,))
+								.attr("id", "path1-"+ currentCity.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -213,11 +225,11 @@ if (jQuery('.line-viz-1').length ) {
 				var path2 = svg.append("path")
 								.datum(revDataset.filter(
 									function(d){
-										return (d.cityName == city && d.revType == "Own Source Revenue")
+										return (d.cityName == currentCity && d.revType == "Own Source Revenue")
 									}
 								))
 								.attr("class", "ownSourceRevLine")
-								.attr("id", "path2-"+ city.substring(4,))
+								.attr("id", "path2-"+ currentCity.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -227,11 +239,11 @@ if (jQuery('.line-viz-1').length ) {
 				var path3 = svg.append("path")
 								.datum(revDataset.filter(
 									function(d){
-										return (d.cityName == city && d.revType == "Property Tax Revenue")
+										return (d.cityName == currentCity && d.revType == "Property Tax Revenue")
 									}
 								))
 								.attr("class", "ptRevLine ")
-								.attr("id", "path3-"+ city.substring(4,))
+								.attr("id", "path3-"+ currentCity.substring(4,))
 								.attr("d", revLine)
 								.attr("data-legend",function(d) { return d.name});
 
@@ -289,7 +301,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				var cityData = originalDataset.filter(
 					function(d){
-						return d.cityName == city;
+						return d.cityName == currentCity;
 					}
 				);
 
@@ -410,6 +422,7 @@ if (jQuery('.line-viz-1').length ) {
 				);
 				jQuery('select').on('change', function(evt, params) {
 					var city = jQuery(this).val();
+					console.log("jquery: " + city);
 					updateCity(city);
 				});
 
@@ -434,6 +447,7 @@ if (jQuery('.line-viz-1').length ) {
 
 				jQuery('#ySlider').on('change', function(evt, params) {
 								var yMax = jQuery(this).val();
+								console.log("yMax currentCity: " + currentCity);
 								updateYScale(yMax);
 							});
 
@@ -578,6 +592,8 @@ if (jQuery('.line-viz-1').length ) {
 
 		function updateCity(city) {
 
+			currentCity = city;
+
 			cityData = originalDataset.filter(
 				function(d){
 					return d.cityName == city;
@@ -586,9 +602,6 @@ if (jQuery('.line-viz-1').length ) {
 
 			years = _.pluck(cityData, 'year');
 
-			d3.selectAll(".line-viz-1")
-				.select('h5')
-				.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
 
 			svg.select('[id^=path1]')
 					.datum(revDataset.filter(
@@ -625,6 +638,8 @@ if (jQuery('.line-viz-1').length ) {
 
 			svg.call(hover, path3); 
 
+			//updateTitle(city, option2);
+			console.log("updatecity: " + city);
 			return city;
 
 		} // End updateCity
@@ -664,6 +679,7 @@ if (jQuery('.line-viz-1').length ) {
 						.attr("id", "path3a-"+ option2.substring(4,))
 						.attr("d", revLine)
 
+			//updateTitle(city, option2);			
 
 			return option2;
 
@@ -672,6 +688,8 @@ if (jQuery('.line-viz-1').length ) {
 
 
 		function updateYScale(yMax) {
+
+			console.log(currentCity);
 
 			yScale = d3.scaleLinear()
 				.domain([
@@ -697,10 +715,41 @@ if (jQuery('.line-viz-1').length ) {
 					return yScale(d.amount); 
 				});
 
-			updateCity(city);
+			updateCity(currentCity);
 			updateOption2(option2);
 
 		} // End updateYScale
+
+
+		// function updateTitle(city, option2) {
+
+		// 	console.log(city);
+
+		// 	d3.selectAll(".dynamic-title")
+		// 		.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
+
+
+		// 	if (option2 != "none"){
+
+		// 		if (option2.includes(":")) {
+				
+		// 			d3.selectAll(".dynamic-title")
+		// 			.text("Showing: " + city.substring(3,) + ", " 
+		// 			+ city.substring(0, 2) 
+		// 			+ " compared to " + option2.substring(3,) + ", " 
+		// 			+ option2.substring(0, 2));
+
+		// 		} else {
+
+		// 		d3.selectAll(".dynamic-title")
+		// 				.text("Showing: " + city.substring(3,) + ", " 
+		// 				+ city.substring(0, 2) 
+		// 				+ " compared to " + option2);
+		// 		}
+		// 	}
+
+
+		// } // End updateTitle
 
 
 
