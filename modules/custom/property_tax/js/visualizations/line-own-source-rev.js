@@ -638,8 +638,7 @@ if (jQuery('.line-viz-1').length ) {
 
 			svg.call(hover, path3); 
 
-			//updateTitle(city, option2);
-			console.log("updatecity: " + city);
+			updateTitle(currentCity, option2);
 			return city;
 
 		} // End updateCity
@@ -679,8 +678,9 @@ if (jQuery('.line-viz-1').length ) {
 						.attr("id", "path3a-"+ option2.substring(4,))
 						.attr("d", revLine)
 
-			//updateTitle(city, option2);			
+			updateTitle(currentCity, option2);			
 
+							
 			return option2;
 
 
@@ -721,35 +721,34 @@ if (jQuery('.line-viz-1').length ) {
 		} // End updateYScale
 
 
-		// function updateTitle(city, option2) {
-
-		// 	console.log(city);
-
-		// 	d3.selectAll(".dynamic-title")
-		// 		.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
+		function updateTitle(city, option2) {
 
 
-		// 	if (option2 != "none"){
+			d3.selectAll(".dynamic-title")
+				.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
 
-		// 		if (option2.includes(":")) {
+
+			if (option2 != "none"){
+
+				if (option2.includes(":")) {
 				
-		// 			d3.selectAll(".dynamic-title")
-		// 			.text("Showing: " + city.substring(3,) + ", " 
-		// 			+ city.substring(0, 2) 
-		// 			+ " compared to " + option2.substring(3,) + ", " 
-		// 			+ option2.substring(0, 2));
+					d3.selectAll(".dynamic-title")
+					.text("Showing: " + city.substring(3,) + ", " 
+					+ city.substring(0, 2) 
+					+ " compared to " + option2.substring(3,) + ", " 
+					+ option2.substring(0, 2));
 
-		// 		} else {
+				} else {
 
-		// 		d3.selectAll(".dynamic-title")
-		// 				.text("Showing: " + city.substring(3,) + ", " 
-		// 				+ city.substring(0, 2) 
-		// 				+ " compared to " + option2);
-		// 		}
-		// 	}
+				d3.selectAll(".dynamic-title")
+						.text("Showing: " + city.substring(3,) + ", " 
+						+ city.substring(0, 2) 
+						+ " compared to " + option2);
+				}
+			}
 
 
-		// } // End updateTitle
+		} // End updateTitle
 
 
 

@@ -386,6 +386,10 @@ Visualizations
   stroke: #92C82A;
 }
 
+.dynamic-title {
+  padding-bottom: 1em;
+}
+
 .axis path,
 .axis line {
   fill: none;
