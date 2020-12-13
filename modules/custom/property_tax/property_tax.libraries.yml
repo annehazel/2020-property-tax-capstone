@@ -22,6 +22,10 @@ d3-color-legend:
   js:
     ../../../node_modules/d3-color-legend/dist/d3-color-legend.min.js: {}
 
+d3fc:
+  version: 15.1.2
+  js:
+    ../../../node_modules/d3fc/build/d3fc.min.js: {}
 
 bootstrap-slider:
   version: 11.0.2

@@ -413,6 +413,7 @@ if (jQuery('.line-viz-1').length ) {
 					updateCity(city);
 				});
 
+				inputCol1.append("h5").text('Adjust X-Axis Scale');
 
 				var ySlider2 = inputCol1.append('input')
 										.attr('type', 'text')
@@ -585,7 +586,9 @@ if (jQuery('.line-viz-1').length ) {
 
 			years = _.pluck(cityData, 'year');
 
-
+			d3.selectAll(".line-viz-1")
+				.select('h5')
+				.text("Showing: " + city.substring(3,) + ", " + city.substring(0, 2));
 
 			svg.select('[id^=path1]')
 					.datum(revDataset.filter(
