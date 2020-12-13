@@ -9,6 +9,14 @@ div.region-sidebar-first {
         color: $lincoln-gray;
         font-weight: 500;
 
+        li {
+            padding: .5em;
+            border-style: solid;
+            border-width:.5px;
+            border-color: white;
+        }
+
+
         
 
         @media (min-width: 992px) { 
@@ -25,33 +33,42 @@ div.region-sidebar-first {
         a {
 
             color:black;
-
-
         }
 
         .nav > li > a {
 
             &:hover {
 
-                background-color: $lincoln-green;
+                text-decoration: underline;
+                text-decoration-color: $lincoln-green;
+                text-decoration-thickness: 2px;
+                background-color: transparent !important;
+
             }
 
 
         }
 
-        ul.menu--center-sections {
-
-            
-        }
+ 
+        
 
         nav#block-centersections {
             ul {
                 display: flex;
                 flex-direction: column;
                 position: relative;
+                background-color: $lincoln-gray;
+                a {
+                    color: white;
+                    background-color: $lincoln-gray;
+                    font-size: large;
+                    font-weight: 400;
+                }
             }
             li{
                 background-color: $lincoln-gray;
+                padding: .8em;
+                color:white;
                 display: none; 
                 order: 1;
                 &.active-trail {
@@ -61,8 +78,8 @@ div.region-sidebar-first {
                     &:after {
                         display: block;
                         position: absolute;
-                        right: 11px;
-                        top: 11px;
+                        right: 20px;
+                        top: 22px;
                         content: "";
                         width: 0;
                         height: 0;
@@ -76,8 +93,9 @@ div.region-sidebar-first {
             }
 
             ul.expanded {
-
+                background-color: $lincoln-gray;
                 li {
+                    background-color: $lincoln-gray;
                     &:not(.active-trail) {
                         position: absolute;
                         z-index: 10;
@@ -90,6 +108,11 @@ div.region-sidebar-first {
                         }
                     }
                     display: block;
+
+                    &:hover {
+                        text-decoration: underline;
+                        text-decoration-color: $lincoln-green;
+                    }
                 }
             }
         }

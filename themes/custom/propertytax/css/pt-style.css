@@ -90,11 +90,17 @@ article.ptc-landing-page div.content {
 
 article.ptc-book-page div.content h3 {
   margin-bottom: 1.5em;
+  padding-top: 0.2em;
+  margin-top: 0;
 }
 
 .field--name-field-paragraph-text div {
   width: 80%;
   padding-bottom: 3em;
+}
+
+.main-container .row {
+  padding-top: 2em;
 }
 
 /*-----------------------------------------
@@ -131,8 +137,7 @@ Components
 .ptc-section-container div.views-col {
   margin-top: 1.5em;
   background-color: rgba(72, 83, 91, 0.8);
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding: 1.5em 0.5em;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -171,6 +176,12 @@ div.region-sidebar-first {
   color: #48535B;
   font-weight: 500;
 }
+div.region-sidebar-first li {
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: white;
+}
 @media (min-width: 992px) {
   div.region-sidebar-first {
     min-height: calc(90vh - 100px);
@@ -184,15 +195,27 @@ div.region-sidebar-first a {
   color: black;
 }
 div.region-sidebar-first .nav > li > a:hover {
-  background-color: #92C82A;
+  text-decoration: underline;
+  text-decoration-color: #92C82A;
+  text-decoration-thickness: 2px;
+  background-color: transparent !important;
 }
 div.region-sidebar-first nav#block-centersections ul {
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: #48535B;
+}
+div.region-sidebar-first nav#block-centersections ul a {
+  color: white;
+  background-color: #48535B;
+  font-size: large;
+  font-weight: 400;
 }
 div.region-sidebar-first nav#block-centersections li {
   background-color: #48535B;
+  padding: 0.8em;
+  color: white;
   display: none;
   order: 1;
 }
@@ -204,8 +227,8 @@ div.region-sidebar-first nav#block-centersections li.active-trail {
 div.region-sidebar-first nav#block-centersections li.active-trail:after {
   display: block;
   position: absolute;
-  right: 11px;
-  top: 11px;
+  right: 20px;
+  top: 22px;
   content: "";
   width: 0;
   height: 0;
@@ -214,7 +237,11 @@ div.region-sidebar-first nav#block-centersections li.active-trail:after {
   border-bottom: 8px solid transparent;
   transition: 0.2s ease all;
 }
+div.region-sidebar-first nav#block-centersections ul.expanded {
+  background-color: #48535B;
+}
 div.region-sidebar-first nav#block-centersections ul.expanded li {
+  background-color: #48535B;
   display: block;
 }
 div.region-sidebar-first nav#block-centersections ul.expanded li:not(.active-trail) {
@@ -225,6 +252,10 @@ div.region-sidebar-first nav#block-centersections ul.expanded li:not(.active-tra
 }
 div.region-sidebar-first nav#block-centersections ul.expanded li.active-trail:after {
   transform: rotate(90deg);
+}
+div.region-sidebar-first nav#block-centersections ul.expanded li:hover {
+  text-decoration: underline;
+  text-decoration-color: #92C82A;
 }
 
 /* main content area*/
