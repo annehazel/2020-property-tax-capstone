@@ -263,7 +263,7 @@ if (jQuery('.line-viz-1').length ) {
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
 
-
+		
 
 
 				var path2a = svg.append("path")
@@ -276,7 +276,8 @@ if (jQuery('.line-viz-1').length ) {
 								.attr("id", "path2a-"+ option2.substring(4,))
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
-
+				
+			
 
 
 				var path3a = svg.append("path")
@@ -290,7 +291,7 @@ if (jQuery('.line-viz-1').length ) {
 								.style("stroke-dasharray", ("3, 3"))
 								.attr("d", revLine);
 
-
+		
 
 				/* ---------------------------------
 					Hover / Tooltip Functionality

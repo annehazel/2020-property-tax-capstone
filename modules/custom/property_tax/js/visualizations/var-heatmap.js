@@ -21,6 +21,8 @@ var color = "#14765f";
 var currentRegion = "New England";
 var currentVar = "Property Tax Revenue";
 
+
+
 var margin = {top: 30, right: 30, bottom: 30, left: 110};
 
 // Function to convert Dates to strings
@@ -91,6 +93,8 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 
     }
 
+
+
     var avgDatasetRHP = originalDatasetRHP.filter(
       function(d){
         return (d.cityName == "Average for All Cities" || 
@@ -114,8 +118,14 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
       }
     );
 
+    var revenueSources = [];
 
+    for (index = 0; index < originalDatasetRHP.length; index++) {
+      revenueSources.push(originalDatasetRHP[index].revType);
+    }
 
+    revenueSources = revenueSources.filter(onlyUnique);
+    console.log(revenueSources);
 
 
 
@@ -168,7 +178,8 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
     // Add dynamic viz title
     d3.selectAll(".var-heatmap")
         .append('h5')
-        .text("Showing: " + currentVar + " per Capita for " + currentRegion);
+        .attr("class", "dynamic-title-2")
+        .text("Showing: " + currentVar + " for the " + currentRegion + " region");
 
     // Add div for legend
     // d3.selectAll(".var-heatmap")
@@ -180,6 +191,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
                   .append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
+                    .attr("class", "mainSVG")
                     .append("g")
                     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
@@ -206,13 +218,13 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
         .attr("class", "axis")
         .call(d3.axisLeft(y));
 
+
     var myColor = d3.scaleLinear()
         .range(["white", color])
         .domain([
           0,
           d3.max(varDatasetRHP, function(d) { return d.amount; })
       ]);
-
 
 
     var sqWidth = (width/years.length) - 1.5;
@@ -304,7 +316,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 									.append("div")
 									.attr("class", "col-md-4 viz-input-col");
 
-				inputCol2.append("h5").text('Select a Revenue Source:');
+				inputCol2.append("h5").text('Select a revenue source:');
 
 				var inputCol3 = d3.select('.filters-var-heatmap')
 									.append("div")
@@ -348,7 +360,8 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
             }
           );
 
-					drawSVG(varDatasetRHP);
+          drawSVG(varDatasetRHP);
+          updateTitle(currentRegion, currentVar);
 				});
 
 
@@ -356,34 +369,31 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
 				//Create compare option input (col 2)
 				
 				var varSelect = inputCol2.append('div')
-                                      .attr('class','second-city')
+                                      .attr('class','rev-source')
                                       .append('select')
-                                      .attr('class','form-control cities-list-option2');
+                                      .attr('class','form-control rev-list');
 
 			  
 			  varSelect.selectAll('option')
-                      .data(regions).enter()
+                      .data(revenueSources).enter()
                       .append('option')
                         .text(function (d) { return d; });
 
 
-				jQuery('.cities-list-option2').chosen(
+				jQuery('.rev-list').chosen(
 					{disable_search_threshold: 10}
-				);
-				jQuery('select.cities-list-option2').on('change', function(evt, params) {
-					option2 = jQuery(this).val();
-					updateOption2(option2);
+        );
+        
+				jQuery('select.rev-list').on('change', function(evt, params) {
+          var rev = jQuery(this).val();
+          updateRevenue(rev);
+          updateTitle(currentRegion, rev);
 				});
 
 
 
 
-				//Create second city option input (col 3, option 1)
-
-
-
-
-				//Create average option inputs (col 3, option 2)
+				//Create second city option input (col 3, option 1
 
 				
 				var avgs = inputCol3.append('div')
@@ -399,7 +409,7 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
               .attr('class', 'color')
 							.attr('value', color);
 
-				avgLabel1.append('text').text('Pick a new color');
+				avgLabel1.append('text').text('');
 
 
 				jQuery('input.color').on('blur', function(evt, params) {
@@ -425,11 +435,18 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
             .selectAll('rect')
             .style("fill", function(d) { return myColor(d.amount)} )
 
+
         }
 
 
 
-        function updateRegion(currentRegion) {
+        function updateRevenue(rev) {
+
+          console.log("rev:" + rev);
+
+          currentVar = rev;
+
+          console.log("currentRev:" + currentVar);
 
           varDatasetRHP = revDatasetRHP.filter(
             function(d){
@@ -438,93 +455,63 @@ d3.csv("/sites/default/files/2020-11/fisc_full_dataset_2017_update.csv", functio
             }
           );
 
-          for (index = 0; index < varDatasetRHP.length; index++) {
-            cities.push(varDatasetRHP[index].cityName);
-          }
-      
-          for (index = 0; index < revDatasetRHP.length; index++) {
-            allCities.push(revDatasetRHP[index].cityName);
-          }
-      
-          function onlyUnique(value, index, self) {
-            return self.indexOf(value) === index;
-          }
-      
-          cities = cities.filter(onlyUnique);
-          allCities = allCities.filter(onlyUnique);
-        // Get list of unique years in dataset
-    
-    
-        height = cities.length * 15;
-
-        d3.selectAll('rect').remove();
-        d3.selectAll('.axis').remove();
-
-      var x = d3.scaleTime()
-        .rangeRound([0,width])
-        .domain([
-         d3.min(revDatasetRHP, function(d) { return d.year; }),
-         d3.max(revDatasetRHP, function(d) { return d.year; })
-       ]);
-
-      svg.append("g")
-        .attr("transform", "translate(8," + (height+3) + ")")
-        .call(d3.axisBottom(x))
-
-
-      // Build X scales and axis:
-      y = d3.scaleBand()
-        .range([ height, 0 ])
-        .domain(cities)
-
-      svg.append("g")
-        .call(d3.axisLeft(y));
-
-        // Create color scale for squares
-      myColor = d3.scaleLinear()
-          .range(["white", color])
-          .domain([
-           0,
-           d3.max(varDatasetRHP, function(d) { return d.amount; })
-         ])
-
+          myColor = d3.scaleLinear()
+              .range(["white", color])
+              .domain([
+                0,
+                d3.max(varDatasetRHP, function(d) { return d.amount; })
+            ]);
 
           // Create the squares
-          svg.selectAll()
-          .data(varDatasetRHP)
-          .enter()
-          .append("rect")
-          .attr("x", function(d) { return x(d.year);})
-          .attr("y", function(d) { return y(d.cityName) })
-          .attr("width", sqWidth)
-          .attr("height", "18")
-          .style("fill", function(d) { return myColor(d.amount)})
-          // setup tooltip
-          .on("mouseover", function(d, i) {
-            var xPos = parseFloat(d3.select(this).attr("x"));
-            var yPos = parseFloat(d3.select(this).attr("y"))
-            //Update the tooltip position and value
-            d3.selectAll(".varheatmap1-tooltip")
-            .style("left", xPos + "px")
-            .style("top", yPos + "px")
-            .selectAll(".varheatmap1-tooltip-heading")
-            .text(i.cityName + " ("+ formatTime(i.year) + ")");
+          d3.selectAll('.mainSVG')
+                .selectAll('rect')
+                .data(varDatasetRHP)
+                .style("fill", function(d) { 
 
-            d3.selectAll(".varheatmap1-value")
-            .text("$" + i.amount);
-            
-            //Show the tooltip
-            d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", false);
-          })
-          .on("mouseout", function() {
+                  //console.log(d);
+                  return myColor(d.amount)
+                
+                });
 
-            //Hide the tooltip
-            d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", true);
+        
+          
+                        // setup tooltip
+                      //   .on("mouseover", function(d, i) {
+                      //     var xPos = parseFloat(d3.select(this).attr("x"));
+                      //     var yPos = parseFloat(d3.select(this).attr("y"))
+                      //     //Update the tooltip position and value
+                      //     d3.selectAll(".varheatmap1-tooltip")
+                      //     .style("left", xPos + "px")
+                      //     .style("top", yPos + "px")
+                      //     .selectAll(".varheatmap1-tooltip-heading")
+                      //     .text(i.cityName + " ("+ formatTime(i.year) + ")");
 
-        });
+                      //     d3.selectAll(".varheatmap1-value")
+                      //     .text("$" + i.amount);
+                          
+                      //     //Show the tooltip
+                      //     d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", false);
+                      //   })
+                      //   .on("mouseout", function() {
+
+                      //     //Hide the tooltip
+                      //     d3.selectAll(".varheatmap1-tooltip").classed("varheatmap1-hidden", true);
+
+                      // })
+                  
 
 
         }
+
+        function updateTitle(region, rev) {
+
+          currentVar = rev;
+          currentRegion = region;
+
+          d3.selectAll(".dynamic-title-2")
+          .text("Showing: " + currentVar + " for the " + currentRegion + " region");
+    
+        } // End updateTitle
 
 
     })
