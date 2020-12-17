@@ -11,14 +11,14 @@
 
 
 // To printo modal
-document.getElementById("btnPrint").onclick = function () {
+jQuery('#btnPrint').on('click', function() {
     printElement(document.getElementById("printThis"));
     
     //var modThis = document.querySelector("#printSection .modifyMe");
     //modThis.appendChild(document.createTextNode(" new"));
     
     window.print();
-}
+});
 
 function printElement(elem) {
     var domClone = elem.cloneNode(true);

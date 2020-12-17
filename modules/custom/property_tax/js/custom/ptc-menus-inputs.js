@@ -15,3 +15,9 @@ jQuery(document).on('load', '.cities-list', function () {
     jQuery('.cities-list').chosen();
 
 });
+
+jQuery(".ptc-section-container div.views-col").on('click', function() {
+    window.location = jQuery(this).find("a").attr("href"); 
+    console.log("here");
+    return false;
+  });
